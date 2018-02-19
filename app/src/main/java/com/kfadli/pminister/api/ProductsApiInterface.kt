@@ -6,9 +6,9 @@ import retrofit2.http.GET
 
 interface ProductsApiInterface {
 
-  @GET("/k07iv")
+  @GET("k07iv")
   fun getProductsList(): Observable<Response>
 
-  @GET("/q0oqf")
+  @GET("q0oqf")
   fun getProductDetail(): Observable<Response>
 }
