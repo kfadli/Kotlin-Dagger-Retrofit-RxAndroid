@@ -1,19 +1,26 @@
 package com.kfadli.pminister.activity.main.impl
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import com.kfadli.pminister.R.layout
 import com.kfadli.pminister.activity.base.BaseActivity
 import com.kfadli.pminister.activity.main.IMainPresenter
 import com.kfadli.pminister.activity.main.IMainView
+import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter
 import com.kfadli.pminister.api.ProductsApiInterface
+import com.kfadli.pminister.response.ProductsItem
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_main.*
+
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
 
   lateinit override var presenter: IMainPresenter
 
-  @Inject lateinit var apiService: ProductsApiInterface;
+  private lateinit var adapter: RecyclerProductsAdapter
+
+  @Inject lateinit var apiService: ProductsApiInterface
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +29,20 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
     setContentView(layout.activity_main)
 
     presenter = MainPresenter(this, apiService)
+
+    product_list.setHasFixedSize(true)
+    product_list.layoutManager = LinearLayoutManager(this)
   }
 
-  override fun onDataReceived() {
-    showError("[onDataReceived]")
+
+  override fun onDataReceived(
+      products: List<ProductsItem?>?) {
+
+    showMessage("[onDataReceived]")
+
+    adapter = RecyclerProductsAdapter(products)
+    product_list.adapter = adapter
+
   }
 
   override fun onDataFailed() {
