@@ -1,7 +1,9 @@
 package com.kfadli.pminister.activity.main.impl
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import com.kfadli.pminister.R.attr
 import com.kfadli.pminister.R.layout
 import com.kfadli.pminister.activity.base.BaseActivity
 import com.kfadli.pminister.activity.main.IMainPresenter
@@ -30,6 +32,7 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
 
     presenter = MainPresenter(this, apiService)
 
+    product_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     product_list.setHasFixedSize(true)
     product_list.layoutManager = LinearLayoutManager(this)
   }
@@ -41,6 +44,7 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
     showMessage("[onDataReceived]")
 
     adapter = RecyclerProductsAdapter(products)
+
     product_list.adapter = adapter
 
   }

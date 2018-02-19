@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import com.kfadli.pminister.R
 import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter.ProductHolder
 import com.kfadli.pminister.response.ProductsItem
+import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.loadUrl
 
 import kotlinx.android.synthetic.main.product.view.*
+import java.text.NumberFormat
 
 class RecyclerProductsAdapter(
 
@@ -20,8 +22,8 @@ class RecyclerProductsAdapter(
     return products?.size ?: 0
   }
 
-  override fun onBindViewHolder(holder: ProductHolder?, position: Int) {
-    holder?.bind(products!![position])
+  override fun onBindViewHolder(holder: ProductHolder, position: Int) {
+    holder.bind(products!![position]!!)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ProductHolder {
@@ -35,16 +37,19 @@ class RecyclerProductsAdapter(
     override fun onClick(v: View?) {
     }
 
-    fun bind(product: ProductsItem?) {
-      itemView.title_txt.text = product?.headline
-      itemView.new_price_txt.text = product?.newBestPrice.toString()
-      itemView.used_price_txt.text = product?.bestPrice.toString()
-      itemView.picture_img.loadUrl(product!!.images!![0]!!.imagesUrls!!.entry!![2]!!.url!!)
+    fun bind(product: ProductsItem) {
+
+      var items = product.images!![0]!!.imagesUrls!!.entry!!
+          .filter { entryItem -> entryItem!!.size == "MEDIUM" }
+
+      itemView.title_txt.text = product.headline
+      itemView.new_price_txt.text = currencyFormat().format(product.newBestPrice)
+      itemView.used_price_txt.text = currencyFormat().format(product.bestPrice)
+      itemView.picture_img.loadUrl(items[0]!!.url!!)
     }
 
   }
 
 }
-
 
 
