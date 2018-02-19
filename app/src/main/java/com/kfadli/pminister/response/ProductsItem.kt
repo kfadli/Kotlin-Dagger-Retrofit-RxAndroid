@@ -43,7 +43,7 @@ data class ProductsItem(
 	val usedBestPrice: Double? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@field:SerializedName("prdCategory")
 	val prdCategory: String? = null,
