@@ -43,7 +43,7 @@ data class ClusterProductsItem(
 	val advertsUsedCount: Int? = null,
 
 	@field:SerializedName("newBestPrice")
-	val newBestPrice: Int? = null,
+	val newBestPrice: Double? = null,
 
 	@field:SerializedName("imagesUrls")
 	val imagesUrls: List<String?>? = null,
@@ -58,13 +58,13 @@ data class ClusterProductsItem(
 	val isNotModifiedSinceLastCrawl: Boolean? = null,
 
 	@field:SerializedName("usedBestPrice")
-	val usedBestPrice: Int? = null,
+	val usedBestPrice: Double? = null,
 
 	@field:SerializedName("attributes")
 	val attributes: Any? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@field:SerializedName("isPreOrder")
 	val isPreOrder: Boolean? = null

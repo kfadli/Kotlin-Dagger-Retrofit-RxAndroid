@@ -4,7 +4,7 @@ import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
 
 @Generated("com.robohorse.robopojogenerator")
-data class Result(
+data class ResultDetail(
 
 	@field:SerializedName("cluster")
 	val cluster: Cluster? = null,

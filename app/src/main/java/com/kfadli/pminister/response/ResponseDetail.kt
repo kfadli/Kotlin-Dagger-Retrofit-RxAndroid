@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponseDetail(
 
 	@field:SerializedName("result")
-	val result: Result? = null,
+	val result: ResultDetail? = null,
 
 	@field:SerializedName("webserviceVersion")
 	val webserviceVersion: String? = null

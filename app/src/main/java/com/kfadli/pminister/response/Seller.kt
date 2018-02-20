@@ -46,7 +46,7 @@ data class Seller(
 	val userFirstAdvertTrackingDate: Any? = null,
 
 	@field:SerializedName("sellerAnswerTime")
-	val sellerAnswerTime: Int? = null,
+	val sellerAnswerTime: Long? = null,
 
 	@field:SerializedName("totalSaleCount")
 	val totalSaleCount: Int? = null,

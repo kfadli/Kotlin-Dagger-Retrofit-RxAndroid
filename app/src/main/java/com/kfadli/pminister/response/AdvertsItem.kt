@@ -25,7 +25,7 @@ data class AdvertsItem(
 	val isUnlimitedQuantity: Boolean? = null,
 
 	@field:SerializedName("salePrice")
-	val salePrice: Int? = null,
+	val salePrice: Double? = null,
 
 	@field:SerializedName("isAdvertInCircleRange")
 	val isAdvertInCircleRange: Boolean? = null,
