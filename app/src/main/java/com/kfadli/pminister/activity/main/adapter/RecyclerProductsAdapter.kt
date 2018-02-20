@@ -1,7 +1,9 @@
 package com.kfadli.pminister.activity.main.adapter
 
+import android.content.Intent
+import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import com.kfadli.pminister.R
+import com.kfadli.pminister.activity.detail.impl.DetailActivity
 import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter.ProductHolder
 import com.kfadli.pminister.response.ProductsItem
 import com.kfadli.pminister.util.currencyFormat
@@ -87,6 +90,8 @@ class RecyclerProductsAdapter(
   class ProductHolder(itemView: View?) : RecyclerView.ViewHolder(itemView), OnClickListener {
 
     override fun onClick(v: View?) {
+      ContextCompat.startActivity(itemView.context,
+          Intent(itemView.context, DetailActivity::class.java), Bundle())
     }
 
     fun bind(product: ProductsItem) {
@@ -101,6 +106,8 @@ class RecyclerProductsAdapter(
       itemView.reviews_txt.text = product.nbReviews.toString()
 
       setReviews(roundReview(product.reviewsAverageNote!!))
+
+      itemView.setOnClickListener(this)
     }
 
     /**
