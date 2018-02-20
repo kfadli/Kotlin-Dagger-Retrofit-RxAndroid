@@ -1,6 +1,7 @@
 package com.kfadli.pminister.activity.main.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -12,13 +13,22 @@ import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter.Produc
 import com.kfadli.pminister.response.ProductsItem
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.loadUrl
+import com.kfadli.pminister.util.roundReview
 import kotlinx.android.synthetic.main.product.view.new_price_txt
 import kotlinx.android.synthetic.main.product.view.picture_img
+import kotlinx.android.synthetic.main.product.view.reviews_txt
+import kotlinx.android.synthetic.main.product.view.star_five
+import kotlinx.android.synthetic.main.product.view.star_four
+import kotlinx.android.synthetic.main.product.view.star_one
+import kotlinx.android.synthetic.main.product.view.star_three
+import kotlinx.android.synthetic.main.product.view.star_two
 import kotlinx.android.synthetic.main.product.view.title_txt
 import kotlinx.android.synthetic.main.product.view.used_price_txt
 
 class RecyclerProductsAdapter(
     private val products: List<ProductsItem?>?) : RecyclerView.Adapter<ProductHolder>(), Filterable {
+
+  private val TAG: String = "RecyclerProductsAdapter"
 
   private val productsFiltered: ArrayList<ProductsItem?> = ArrayList()
 
@@ -88,7 +98,50 @@ class RecyclerProductsAdapter(
       itemView.new_price_txt.text = currencyFormat().format(product.newBestPrice)
       itemView.used_price_txt.text = currencyFormat().format(product.bestPrice)
       itemView.picture_img.loadUrl(items[0]!!.url!!)
+      itemView.reviews_txt.text = product.nbReviews.toString()
+
+      setReviews(roundReview(product.reviewsAverageNote!!))
     }
+
+    /**
+     * Draw Stars based of reviews average on Product
+     */
+    private fun setReviews(review: Double) {
+
+      itemView.star_one.setImageResource(R.drawable.ic_star_border_grey_24dp)
+      itemView.star_two.setImageResource(R.drawable.ic_star_border_grey_24dp)
+      itemView.star_three.setImageResource(R.drawable.ic_star_border_grey_24dp)
+      itemView.star_four.setImageResource(R.drawable.ic_star_border_grey_24dp)
+      itemView.star_five.setImageResource(R.drawable.ic_star_border_grey_24dp)
+
+      var n = 0
+      while (n < review.toInt()) {
+
+        n++
+
+        when (n) {
+          1 -> itemView.star_one.setImageResource(R.drawable.ic_star_orange_24dp)
+          2 -> itemView.star_two.setImageResource(R.drawable.ic_star_orange_24dp)
+          3 -> itemView.star_three.setImageResource(R.drawable.ic_star_orange_24dp)
+          4 -> itemView.star_four.setImageResource(R.drawable.ic_star_orange_24dp)
+          5 -> itemView.star_five.setImageResource(R.drawable.ic_star_orange_24dp)
+        }
+
+      }
+
+      if ((review - n).compareTo(0.5) == 0) {
+
+        when (n) {
+          0 -> itemView.star_one.setImageResource(R.drawable.ic_star_half_orange_24dp)
+          1 -> itemView.star_two.setImageResource(R.drawable.ic_star_half_orange_24dp)
+          2 -> itemView.star_three.setImageResource(R.drawable.ic_star_half_orange_24dp)
+          3 -> itemView.star_four.setImageResource(R.drawable.ic_star_half_orange_24dp)
+          4 -> itemView.star_five.setImageResource(R.drawable.ic_star_half_orange_24dp)
+        }
+      }
+
+    }
+
 
   }
 

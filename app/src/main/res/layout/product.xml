@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:background="#ffffff"
     >
 
   <TextView
@@ -14,10 +15,10 @@
       android:layout_marginEnd="8dp"
       android:layout_marginStart="100dp"
       android:layout_marginTop="8dp"
-      android:text="TextView"
+      android:ellipsize="end"
       android:inputType="text"
       android:maxLines="1"
-      android:ellipsize="end"
+      android:text="TextView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -42,42 +43,113 @@
       android:id="@+id/new_price_txt"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
       android:layout_marginStart="100dp"
-      android:layout_marginTop="12dp"
       android:text="TextView"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/title_txt"
       tools:text="@sample/products.json/products/newBestPrice"
       />
   <TextView
       android:id="@+id/new_price_label"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
       android:layout_marginStart="8dp"
-      android:layout_marginTop="12dp"
       android:text="Neuf"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@+id/new_price_txt"
-      app:layout_constraintTop_toBottomOf="@+id/title_txt"
       />
   <TextView
       android:id="@+id/used_price_txt"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="100dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="24dp"
       android:text="TextView"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/new_price_txt"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/new_price_label"
       tools:text="@sample/products.json/products/usedBestPrice"
       />
   <TextView
       android:id="@+id/used_price_label"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
       android:layout_marginStart="8dp"
-      android:layout_marginTop="8dp"
       android:text="Occasion"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@+id/used_price_txt"
-      app:layout_constraintTop_toBottomOf="@+id/new_price_label"
+      />
+  <LinearLayout
+      android:id="@+id/score_layout"
+      android:layout_width="100dp"
+      android:layout_height="25dp"
+      android:layout_marginStart="100dp"
+      android:layout_marginTop="8dp"
+      android:orientation="horizontal"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/title_txt"
+      >
+    <ImageView
+        android:id="@+id/star_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_star_orange_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/star_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_star_orange_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/star_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_star_orange_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/star_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_star_orange_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/star_five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_star_orange_24dp"
+        />
+  </LinearLayout>
+  <TextView
+      android:id="@+id/reviews_txt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="11dp"
+      android:text="TextView"
+      app:layout_constraintStart_toEndOf="@+id/score_layout"
+      app:layout_constraintTop_toBottomOf="@+id/title_txt"
+      tools:text="@sample/products.json/products/nbReviews"
+      />
+  <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="11dp"
+      android:text="Avis"
+      app:layout_constraintStart_toEndOf="@+id/reviews_txt"
+      app:layout_constraintTop_toBottomOf="@+id/title_txt"
       />
 </android.support.constraint.ConstraintLayout>

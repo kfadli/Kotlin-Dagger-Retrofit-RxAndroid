@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">PriceMinister</string>
+  <string name="search_menu">Search</string>
 </resources>
