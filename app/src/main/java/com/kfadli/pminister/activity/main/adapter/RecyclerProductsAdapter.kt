@@ -5,25 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import com.kfadli.pminister.R
 import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter.ProductHolder
 import com.kfadli.pminister.response.ProductsItem
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.loadUrl
-
-import kotlinx.android.synthetic.main.product.view.*
-import java.text.NumberFormat
+import kotlinx.android.synthetic.main.product.view.new_price_txt
+import kotlinx.android.synthetic.main.product.view.picture_img
+import kotlinx.android.synthetic.main.product.view.title_txt
+import kotlinx.android.synthetic.main.product.view.used_price_txt
 
 class RecyclerProductsAdapter(
+    private val products: List<ProductsItem?>?) : RecyclerView.Adapter<ProductHolder>(), Filterable {
 
-    private val products: List<ProductsItem?>?) : RecyclerView.Adapter<ProductHolder>() {
+  private val productsFiltered: ArrayList<ProductsItem?> = ArrayList()
 
   override fun getItemCount(): Int {
-    return products?.size ?: 0
+    return productsFiltered.size
   }
 
   override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-    holder.bind(products!![position]!!)
+    holder.bind(productsFiltered!![position]!!)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ProductHolder {
@@ -31,8 +35,46 @@ class RecyclerProductsAdapter(
         LayoutInflater.from(parent?.context).inflate(R.layout.product, parent, false))
   }
 
-  class ProductHolder(itemView: View?) : RecyclerView.ViewHolder(itemView), OnClickListener {
+  override fun getFilter(): Filter {
 
+    return object : Filter() {
+
+      private val filtered: ArrayList<ProductsItem?> = ArrayList()
+
+      override fun performFiltering(constraint: CharSequence?): FilterResults {
+
+        filtered.clear()
+
+        if (constraint != null && constraint.isNotEmpty()) {
+          val query = constraint.toString()
+
+          products!!.forEach { t: ProductsItem? ->
+            if (t!!.headline!!.contains(query, true)) {
+              filtered.add(t)
+            }
+          }
+        } else {
+          filtered.addAll(products!!)
+        }
+
+        return FilterResults().apply {
+          values = filtered
+          count = filtered.size
+        }
+      }
+
+      override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+        productsFiltered.clear()
+        if (results != null) {
+          productsFiltered.addAll(results.values as MutableList<ProductsItem>)
+        }
+        notifyDataSetChanged()
+      }
+    }
+  }
+
+
+  class ProductHolder(itemView: View?) : RecyclerView.ViewHolder(itemView), OnClickListener {
 
     override fun onClick(v: View?) {
     }
