@@ -20,7 +20,7 @@ class MainPresenter(var view: IMainView, var api: ProductsApiInterface) : IMainP
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ t -> view.onDataReceived(t.result?.products) },
-                { t -> view.onDataFailed() }))
+                { view.onDataFailed() }))
   }
 
   override fun unsubscribe() {

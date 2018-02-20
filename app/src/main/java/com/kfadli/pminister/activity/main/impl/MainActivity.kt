@@ -51,17 +51,11 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
     product_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     product_list.setHasFixedSize(true)
     product_list.layoutManager = LinearLayoutManager(this)
-
   }
 
-  override fun onResume() {
-    super.onResume()
-    subscribe()
-  }
-
-  override fun onPause() {
-    super.onPause()
-    unsubscribe()
+  override fun onDestroy() {
+    disposables.clear()
+    super.onDestroy()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -97,13 +91,6 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
 
   override fun onDataFailed() {
     showError("[onDataFailed]")
-  }
-
-  private fun subscribe() {
-
-  }
-
-  private fun unsubscribe() {
   }
 
 }

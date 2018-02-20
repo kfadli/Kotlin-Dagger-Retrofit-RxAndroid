@@ -22,19 +22,27 @@ abstract class BaseActivity<in V : IView, T : IPresenter<V>> : AppCompatActivity
 
 
   override fun showError(error: String?) {
-    Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    if (!isFinishing) {
+      Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
   }
 
-  override fun showError(stringResId: Int) {
-    Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show()
+  override fun showError(resId: Int) {
+    if (!isFinishing) {
+      Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+    }
   }
 
-  override fun showMessage(srtResId: Int) {
-    Toast.makeText(this, srtResId, Toast.LENGTH_SHORT).show()
+  override fun showMessage(resId: Int) {
+    if (!isFinishing) {
+      Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
+    }
   }
 
   override fun showMessage(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    if (!isFinishing) {
+      Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
   }
 
 }

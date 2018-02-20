@@ -10,7 +10,7 @@ class ImagePagerAdapter(fragmentManager: FragmentManager,
     FragmentStatePagerAdapter(fragmentManager) {
 
   override fun getItem(position: Int): Fragment {
-    return ImageFragment.newInstance(pictures!![position])
+    return ImageFragment.newInstance(pictures[position])
   }
 
   override fun getCount(): Int {

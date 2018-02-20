@@ -20,13 +20,13 @@ import com.kfadli.pminister.util.roundReview
 import kotlinx.android.synthetic.main.product.view.new_price_txt
 import kotlinx.android.synthetic.main.product.view.picture_img
 import kotlinx.android.synthetic.main.product.view.reviews_txt
-import kotlinx.android.synthetic.main.product.view.star_five
-import kotlinx.android.synthetic.main.product.view.star_four
-import kotlinx.android.synthetic.main.product.view.star_one
-import kotlinx.android.synthetic.main.product.view.star_three
-import kotlinx.android.synthetic.main.product.view.star_two
 import kotlinx.android.synthetic.main.product.view.title_txt
 import kotlinx.android.synthetic.main.product.view.used_price_txt
+import kotlinx.android.synthetic.main.score_layout.view.star_five
+import kotlinx.android.synthetic.main.score_layout.view.star_four
+import kotlinx.android.synthetic.main.score_layout.view.star_one
+import kotlinx.android.synthetic.main.score_layout.view.star_three
+import kotlinx.android.synthetic.main.score_layout.view.star_two
 
 class RecyclerProductsAdapter(
     private val products: List<ProductsItem?>?) : RecyclerView.Adapter<ProductHolder>(), Filterable {
@@ -40,7 +40,7 @@ class RecyclerProductsAdapter(
   }
 
   override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-    holder.bind(productsFiltered!![position]!!)
+    holder.bind(productsFiltered[position]!!)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ProductHolder {
