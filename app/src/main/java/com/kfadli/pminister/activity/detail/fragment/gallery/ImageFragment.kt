@@ -1,4 +1,4 @@
-package com.kfadli.pminister.activity.detail.fragment
+package com.kfadli.pminister.activity.detail.fragment.gallery
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,7 +9,6 @@ import android.widget.ImageView
 import com.kfadli.pminister.R
 import com.kfadli.pminister.util.Constant
 import com.kfadli.pminister.util.loadUrl
-import kotlinx.android.synthetic.main.fragment_image.image_gallery
 
 class ImageFragment : Fragment() {
 
@@ -25,7 +24,7 @@ class ImageFragment : Fragment() {
     val args = arguments
 
     // Download the image and display it using Picasso
-    imageView.loadUrl(args.getString(Constant.IMAGE_URL))
+    imageView.loadUrl(args!!.getString(Constant.IMAGE_URL))
     return view
   }
 

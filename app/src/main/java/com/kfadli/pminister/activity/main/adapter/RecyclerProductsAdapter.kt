@@ -20,6 +20,7 @@ import com.kfadli.pminister.util.roundReview
 import kotlinx.android.synthetic.main.product.view.new_price_txt
 import kotlinx.android.synthetic.main.product.view.picture_img
 import kotlinx.android.synthetic.main.product.view.reviews_txt
+import kotlinx.android.synthetic.main.product.view.score
 import kotlinx.android.synthetic.main.product.view.title_txt
 import kotlinx.android.synthetic.main.product.view.used_price_txt
 import kotlinx.android.synthetic.main.score_layout.view.star_five
@@ -104,51 +105,10 @@ class RecyclerProductsAdapter(
       itemView.used_price_txt.text = currencyFormat().format(product.bestPrice)
       itemView.picture_img.loadUrl(items[0]!!.url!!)
       itemView.reviews_txt.text = product.nbReviews.toString()
-
-      setReviews(roundReview(product.reviewsAverageNote!!))
+      itemView.score.rating = product.reviewsAverageNote!!.toFloat()
 
       itemView.setOnClickListener(this)
     }
-
-    /**
-     * Draw Stars based of reviews average on Product
-     */
-    private fun setReviews(review: Double) {
-
-      itemView.star_one.setImageResource(R.drawable.ic_star_border_grey_24dp)
-      itemView.star_two.setImageResource(R.drawable.ic_star_border_grey_24dp)
-      itemView.star_three.setImageResource(R.drawable.ic_star_border_grey_24dp)
-      itemView.star_four.setImageResource(R.drawable.ic_star_border_grey_24dp)
-      itemView.star_five.setImageResource(R.drawable.ic_star_border_grey_24dp)
-
-      var n = 0
-      while (n < review.toInt()) {
-
-        n++
-
-        when (n) {
-          1 -> itemView.star_one.setImageResource(R.drawable.ic_star_orange_24dp)
-          2 -> itemView.star_two.setImageResource(R.drawable.ic_star_orange_24dp)
-          3 -> itemView.star_three.setImageResource(R.drawable.ic_star_orange_24dp)
-          4 -> itemView.star_four.setImageResource(R.drawable.ic_star_orange_24dp)
-          5 -> itemView.star_five.setImageResource(R.drawable.ic_star_orange_24dp)
-        }
-
-      }
-
-      if ((review - n).compareTo(0.5) == 0) {
-
-        when (n) {
-          0 -> itemView.star_one.setImageResource(R.drawable.ic_star_half_orange_24dp)
-          1 -> itemView.star_two.setImageResource(R.drawable.ic_star_half_orange_24dp)
-          2 -> itemView.star_three.setImageResource(R.drawable.ic_star_half_orange_24dp)
-          3 -> itemView.star_four.setImageResource(R.drawable.ic_star_half_orange_24dp)
-          4 -> itemView.star_five.setImageResource(R.drawable.ic_star_half_orange_24dp)
-        }
-      }
-
-    }
-
 
   }
 
