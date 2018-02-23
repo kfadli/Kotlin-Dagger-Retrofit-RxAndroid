@@ -1,5 +1,6 @@
 package com.kfadli.pminister.activity.detail.impl
 
+import android.util.Log
 import com.kfadli.pminister.activity.detail.IDetailPresenter
 import com.kfadli.pminister.activity.detail.IDetailView
 import com.kfadli.pminister.api.ProductsApiInterface
@@ -8,6 +9,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class DetailPresenter(var view: IDetailView, var api: ProductsApiInterface) : IDetailPresenter {
+
+  private val TAG = "DetailPresenter"
 
   var disposables: CompositeDisposable = CompositeDisposable()
 
@@ -19,7 +22,11 @@ class DetailPresenter(var view: IDetailView, var api: ProductsApiInterface) : ID
         api.getProductDetail()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ t -> view.onDataReceived(t.result)}))
+            .subscribe({ t -> view.onDataReceived(t.result) },
+                { t ->
+                  Log.d(TAG, "[subscribe] failed", t)
+                  view.onDataFailed()
+                }))
 
   }
 

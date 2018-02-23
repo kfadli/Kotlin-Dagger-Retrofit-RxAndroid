@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class BestOffers(
 
 	@field:SerializedName("new")
-	val jsonMemberNew: JsonMemberNew? = null,
+	val aNew: New? = null,
 
 	@field:SerializedName("used")
 	val used: Used? = null
