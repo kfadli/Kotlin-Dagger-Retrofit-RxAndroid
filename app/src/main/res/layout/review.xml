@@ -4,18 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:padding="5dp"
     >
 
   <me.zhanghai.android.materialratingbar.MaterialRatingBar
       android:id="@+id/score"
+      style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
       android:layout_width="111dp"
       android:layout_height="20dp"
       android:layout_marginBottom="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginStart="16dp"
+      android:layout_marginLeft="4dp"
+      android:layout_marginStart="4dp"
       android:layout_marginTop="12dp"
       android:maxHeight="20dp"
       android:minHeight="20dp"
@@ -27,9 +28,7 @@
       app:layout_constraintTop_toTopOf="parent"
       app:mrb_fillBackgroundStars="false"
       app:mrb_progressTint="@color/yellow_star"
-      app:mrb_secondaryProgressTint="@color/grey_star"
-      style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
-      />
+      app:mrb_secondaryProgressTint="@color/grey_star" />
 
   <TextView
       android:id="@+id/title_txt"
@@ -44,6 +43,7 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:text="@sample/product_detail.json/result/reviews/title"
       />
+
   <TextView
       android:id="@+id/description"
       android:layout_width="0dp"
@@ -57,9 +57,8 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/date"
-      tools:text="@sample/product_detail.json/result/reviews/description"
-      />
+      app:layout_constraintTop_toBottomOf="@+id/username_txt"
+      tools:text="@sample/product_detail.json/result/reviews/description" />
 
   <TextView
       android:id="@+id/username_txt"
