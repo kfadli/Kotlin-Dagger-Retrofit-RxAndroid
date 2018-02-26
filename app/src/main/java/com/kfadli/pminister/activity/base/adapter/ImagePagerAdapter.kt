@@ -1,9 +1,9 @@
-package com.kfadli.pminister.activity.detail.adapter
+package com.kfadli.pminister.activity.base.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.kfadli.pminister.activity.detail.fragment.gallery.ImageFragment
+import com.kfadli.pminister.activity.base.fragment.ImageFragment
 
 class ImagePagerAdapter(fragmentManager: FragmentManager,
     private val pictures: List<String>) :

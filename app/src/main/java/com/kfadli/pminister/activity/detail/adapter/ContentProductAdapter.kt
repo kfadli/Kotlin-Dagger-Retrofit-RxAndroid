@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.kfadli.pminister.R
-import com.kfadli.pminister.activity.detail.fragment.content.AdvertsFragment
-import com.kfadli.pminister.activity.detail.fragment.content.EditoFragment
-import com.kfadli.pminister.activity.detail.fragment.content.ReviewsFragment
+import com.kfadli.pminister.activity.detail.fragment.AdvertsFragment
+import com.kfadli.pminister.activity.detail.fragment.EditoFragment
+import com.kfadli.pminister.activity.detail.fragment.ReviewsFragment
 import com.kfadli.pminister.response.ResultDetail
 
 class ContentProductAdapter(val context: Context, fragmentManager: FragmentManager,

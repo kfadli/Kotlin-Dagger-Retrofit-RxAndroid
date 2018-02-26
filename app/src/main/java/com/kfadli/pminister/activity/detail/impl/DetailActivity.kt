@@ -10,10 +10,10 @@ import android.view.ViewGroup.LayoutParams
 import com.itsronald.widget.ViewPagerIndicator
 import com.kfadli.pminister.R
 import com.kfadli.pminister.activity.base.BaseActivity
+import com.kfadli.pminister.activity.base.adapter.ImagePagerAdapter
 import com.kfadli.pminister.activity.detail.IDetailPresenter
 import com.kfadli.pminister.activity.detail.IDetailView
 import com.kfadli.pminister.activity.detail.adapter.ContentProductAdapter
-import com.kfadli.pminister.activity.detail.adapter.ImagePagerAdapter
 import com.kfadli.pminister.api.ProductsApiInterface
 import com.kfadli.pminister.response.ResultDetail
 import com.kfadli.pminister.util.QualityEnum
@@ -81,7 +81,8 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
     //Find all url Images with LARGE format
     val urls: List<String> = filterUrlByFormat(product?.images, "LARGE")
-    gallery_viewpager.adapter = ImagePagerAdapter(supportFragmentManager, urls)
+    gallery_viewpager.adapter = ImagePagerAdapter(
+        supportFragmentManager, urls)
 
 
     val bestOffer = product!!.adverts!![0]

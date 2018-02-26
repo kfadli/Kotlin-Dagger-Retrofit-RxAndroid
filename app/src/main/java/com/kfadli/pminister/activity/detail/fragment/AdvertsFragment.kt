@@ -1,4 +1,4 @@
-package com.kfadli.pminister.activity.detail.fragment.content
+package com.kfadli.pminister.activity.detail.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,12 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kfadli.pminister.R
-import com.kfadli.pminister.activity.detail.adapter.RecyclerReviewAdapter
-import com.kfadli.pminister.response.ReviewsItem
+import com.kfadli.pminister.activity.detail.adapter.RecyclerAdvertsAdapter
+import com.kfadli.pminister.response.AdvertsItem
 
-class ReviewsFragment : Fragment() {
 
-  lateinit var reviews: List<ReviewsItem?>
+class AdvertsFragment : Fragment() {
+
+  lateinit var advertsList: List<AdvertsItem?>
 
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
@@ -26,22 +27,26 @@ class ReviewsFragment : Fragment() {
 
     val reviews_recycler = view.findViewById<RecyclerView>(R.id.reviews_recycler)
 
-    reviews_recycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-    reviews_recycler.setHasFixedSize(true)
+    //Setup recycler View
+    reviews_recycler.addItemDecoration(
+        DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     reviews_recycler.layoutManager = LinearLayoutManager(context)
 
-    reviews_recycler.adapter = RecyclerReviewAdapter(reviews)
+    reviews_recycler.adapter = RecyclerAdvertsAdapter(advertsList, context!!)
 
     return view
   }
 
   companion object {
 
-    fun newInstance(reviews: List<ReviewsItem?>?): ReviewsFragment {
+    fun newInstance(advertsList: List<AdvertsItem?>?): AdvertsFragment {
 
-      // Create a new ReviewsFragment and set the Bundle as the arguments
-      val fragment = ReviewsFragment()
-      fragment.reviews = reviews!!
+      // Create a new AdvertFragment and set the Bundle as the arguments
+      val fragment = AdvertsFragment()
+
+      //Drop first element (offer already display on header)
+      fragment.advertsList = advertsList!!.drop(1)
+
       return fragment
     }
   }

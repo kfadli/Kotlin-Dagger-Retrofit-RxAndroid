@@ -1,4 +1,4 @@
-package com.kfadli.pminister.activity.detail.fragment.content
+package com.kfadli.pminister.activity.detail.fragment
 
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES

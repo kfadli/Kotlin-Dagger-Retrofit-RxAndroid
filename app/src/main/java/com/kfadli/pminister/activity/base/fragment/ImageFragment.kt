@@ -1,4 +1,4 @@
-package com.kfadli.pminister.activity.detail.fragment.gallery
+package com.kfadli.pminister.activity.base.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
