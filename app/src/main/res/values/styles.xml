@@ -12,4 +12,13 @@
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+  <style name="seller" parent="@android:style/Widget.TextView">
+    <item name="android:textColor">@color/colorSeller</item>
+  </style>
+
+  <style name="price" parent="@android:style/Widget.TextView">
+    <item name="android:textColor">@android:color/holo_red_dark</item>
+  </style>
+
 </resources>

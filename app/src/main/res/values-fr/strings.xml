@@ -13,4 +13,7 @@
   <string name="quality_very_good">Très bon état</string>
   <string name="quality_new">Neuf</string>
   <string name="average_seller">%1$s /5 - %2$d ventes</string>
+  <string name="something_went_wrong">Quelque chose ne va pas</string>
+  <string name="recommended_offer">Offre recommandé</string>
+
 </resources>
