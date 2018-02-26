@@ -119,14 +119,16 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
    * Method failed to retrieve Data from WebService
    */
   override fun onDataFailed() {
-    val dialogBuilder = Builder(this).create()
+    val dialogBuilder = Builder(this, R.style.error_dialog).create()
+    dialogBuilder.setCancelable(false)
+    dialogBuilder.setTitle(R.string.oops_something_went_wrong)
     dialogBuilder.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.retry),
         { dialog, which ->
           presenter.fetchData(); dialog.dismiss()
         })
     dialogBuilder.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
-        { dialog, which -> dialog.dismiss() })
-    dialogBuilder.setMessage(getString(R.string.something_went_wrong))
+        { dialog, which -> dialog.dismiss(); finish() })
+    dialogBuilder.setMessage(getString(R.string.application_has_encountered_error))
 
     if (!isFinishing) {
       dialogBuilder.show()

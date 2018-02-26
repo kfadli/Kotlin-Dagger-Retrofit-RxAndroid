@@ -13,7 +13,9 @@
   <string name="quality_very_good">Très bon état</string>
   <string name="quality_new">Neuf</string>
   <string name="average_seller">%1$s /5 - %2$d ventes</string>
-  <string name="something_went_wrong">Quelque chose ne va pas</string>
+  <string name="retry">Réessayer</string>
+  <string name="cancel">Annuler</string>
   <string name="recommended_offer">Offre recommandé</string>
-
+  <string name="oops_something_went_wrong">Oops! Quelque chose s\'est mal passé.</string>
+  <string name="application_has_encountered_error">L\'application a rencontré une erreur inconnue</string>
 </resources>

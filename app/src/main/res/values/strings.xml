@@ -13,9 +13,9 @@
   <string name="quality_very_good">Very good</string>
   <string name="quality_new">Very good</string>
   <string name="average_seller">%1$s /5 - %2$d sells</string>
-  <string name="something_went_wrong">Something went wrong</string>
   <string name="retry">Retry</string>
   <string name="cancel">Cancel</string>
   <string name="recommended_offer">Recommended offer</string>
-
+  <string name="oops_something_went_wrong">Something went wrong</string>
+  <string name="application_has_encountered_error">The application has encountered an unknown error</string>
 </resources>

@@ -47,13 +47,6 @@
     </android.support.design.widget.CollapsingToolbarLayout>
   </android.support.design.widget.AppBarLayout>
 
-  <com.wang.avi.AVLoadingIndicatorView
-      android:id="@+id/avi"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:indicatorName="BallPulseIndicator"
-      />
-
   <include layout="@layout/content_detail" />
 
   <ProgressBar

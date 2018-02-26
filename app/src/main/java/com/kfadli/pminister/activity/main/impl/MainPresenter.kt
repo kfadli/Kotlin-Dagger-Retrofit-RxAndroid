@@ -12,9 +12,6 @@ class MainPresenter(var view: IMainView, var api: ProductsApiInterface) : IMainP
   var disposables: CompositeDisposable = CompositeDisposable()
 
   override fun fetchData() {
-  }
-
-  override fun subscribe() {
     disposables.add(
         api.getProductsList()
             .filter({ view != null })
@@ -27,7 +24,11 @@ class MainPresenter(var view: IMainView, var api: ProductsApiInterface) : IMainP
                 {
                   view.hideLoader()
                   view.onDataFailed()
-                }))
+                } ))
+  }
+
+  override fun subscribe() {
+
   }
 
   override fun unsubscribe() {

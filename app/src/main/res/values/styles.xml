@@ -21,4 +21,9 @@
     <item name="android:textColor">@android:color/holo_red_dark</item>
   </style>
 
+
+  <style name="error_dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:textColor">@color/colorSeller</item>
+  </style>
+
 </resources>
