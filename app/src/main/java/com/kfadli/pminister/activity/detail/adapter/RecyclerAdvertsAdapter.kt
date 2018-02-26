@@ -6,18 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kfadli.pminister.R
-import com.kfadli.pminister.R.string
 import com.kfadli.pminister.response.AdvertsItem
 import com.kfadli.pminister.util.QualityEnum
 import com.kfadli.pminister.util.currencyFormat
-import com.kfadli.pminister.util.formatReview
+import com.kfadli.pminister.util.formatSellsAndReviews
 import com.kfadli.pminister.util.toString
 import kotlinx.android.synthetic.main.advert.view.comment_txt
 import kotlinx.android.synthetic.main.advert.view.price_txt
 import kotlinx.android.synthetic.main.advert.view.quality_product_txt
 import kotlinx.android.synthetic.main.advert.view.sells_review_txt
 import kotlinx.android.synthetic.main.advert.view.username_txt
-import kotlin.math.roundToInt
 
 class RecyclerAdvertsAdapter(
 
@@ -43,18 +41,13 @@ class RecyclerAdvertsAdapter(
 
     fun bind(advert: AdvertsItem?, context: Context) {
 
-
       itemView.price_txt.text = currencyFormat().format(advert?.salePrice!!.toDouble())
       itemView.username_txt.text = advert.seller?.login ?: ""
-      itemView.quality_product_txt.text = QualityEnum.valueOf(advert.quality!!).toString(context)
       itemView.comment_txt.text = advert.sellerComment
 
-      if (advert.seller?.averageScore == null) {
-        itemView.sells_review_txt.text = context.getString(string.new_seller)
-      } else {
-        itemView.sells_review_txt.text = context.getString(R.string.average_seller,
-            formatReview(advert.seller.averageScore), advert.seller.saleCount)
-      }
+      itemView.quality_product_txt.text = QualityEnum.valueOf(advert.quality!!).toString(context)
+      itemView.sells_review_txt.text = advert.seller!!.formatSellsAndReviews(context)
+
     }
 
   }

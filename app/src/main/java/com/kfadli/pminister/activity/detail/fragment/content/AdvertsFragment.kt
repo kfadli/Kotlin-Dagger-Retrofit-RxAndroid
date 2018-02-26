@@ -31,6 +31,7 @@ class AdvertsFragment : Fragment() {
     reviews_recycler.addItemDecoration(
         DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     reviews_recycler.layoutManager = LinearLayoutManager(context)
+
     reviews_recycler.adapter = RecyclerAdvertsAdapter(advertsList, context!!)
 
     return view
@@ -38,11 +39,13 @@ class AdvertsFragment : Fragment() {
 
   companion object {
 
-    fun newInstance(reviews: List<AdvertsItem?>?): AdvertsFragment {
+    fun newInstance(advertsList: List<AdvertsItem?>?): AdvertsFragment {
 
       // Create a new AdvertFragment and set the Bundle as the arguments
       val fragment = AdvertsFragment()
-      fragment.advertsList = reviews!!
+
+      //Drop first element (offer already display on header)
+      fragment.advertsList = advertsList!!.drop(1)
 
       return fragment
     }
