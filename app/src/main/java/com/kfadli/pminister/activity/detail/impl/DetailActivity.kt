@@ -14,8 +14,9 @@ import com.kfadli.pminister.activity.base.BaseActivity
 import com.kfadli.pminister.activity.detail.IDetailPresenter
 import com.kfadli.pminister.activity.detail.IDetailView
 import com.kfadli.pminister.activity.detail.adapter.ImagePagerAdapter
-import com.kfadli.pminister.activity.detail.fragment.edito.EditoFragment
-import com.kfadli.pminister.activity.detail.fragment.edito.ReviewsFragment
+import com.kfadli.pminister.activity.detail.fragment.content.AdvertsFragment
+import com.kfadli.pminister.activity.detail.fragment.content.EditoFragment
+import com.kfadli.pminister.activity.detail.fragment.content.ReviewsFragment
 import com.kfadli.pminister.api.ProductsApiInterface
 import com.kfadli.pminister.response.ResultDetail
 import com.kfadli.pminister.util.currencyFormat
@@ -81,13 +82,14 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
                                       val product: ResultDetail) : FragmentStatePagerAdapter(fragmentManager) {
 
         override fun getCount(): Int {
-            return 2
+            return 3
         }
 
         override fun getItem(position: Int): Fragment {
             when (position) {
+                0 -> return AdvertsFragment.newInstance(product.adverts!!)
                 1 -> return ReviewsFragment.newInstance(product.reviews)
-                0 -> return EditoFragment.newInstance(product.edito!!)
+                2 -> return EditoFragment.newInstance(product.edito!!)
             }
 
             return Fragment()
@@ -95,8 +97,9 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
         override fun getPageTitle(position: Int): CharSequence? {
             when (position) {
+                0 -> return getString(R.string.adverts).toUpperCase()
                 1 -> return getString(R.string.reviews).toUpperCase()
-                0 -> return getString(R.string.edito).toUpperCase()
+                2 -> return getString(R.string.edito).toUpperCase()
             }
 
             return ""

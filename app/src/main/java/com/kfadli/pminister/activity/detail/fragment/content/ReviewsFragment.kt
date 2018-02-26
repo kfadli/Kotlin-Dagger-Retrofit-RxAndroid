@@ -1,4 +1,4 @@
-package com.kfadli.pminister.activity.detail.fragment.edito
+package com.kfadli.pminister.activity.detail.fragment.content
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
