@@ -15,9 +15,6 @@ class DetailPresenter(var view: IDetailView, var api: ProductsApiInterface) : ID
   var disposables: CompositeDisposable = CompositeDisposable()
 
   override fun fetchData() {
-  }
-
-  override fun subscribe() {
     disposables.add(
         api.getProductDetail()
             .subscribeOn(Schedulers.io())
@@ -27,7 +24,9 @@ class DetailPresenter(var view: IDetailView, var api: ProductsApiInterface) : ID
                   Log.d(TAG, "[subscribe] failed", t)
                   view.onDataFailed()
                 }))
+  }
 
+  override fun subscribe() {
   }
 
   override fun unsubscribe() {
