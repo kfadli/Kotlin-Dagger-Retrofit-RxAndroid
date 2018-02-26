@@ -13,6 +13,7 @@ import com.kfadli.pminister.R
 import com.kfadli.pminister.activity.base.BaseActivity
 import com.kfadli.pminister.activity.detail.IDetailPresenter
 import com.kfadli.pminister.activity.detail.IDetailView
+import com.kfadli.pminister.activity.detail.adapter.ContentProductAdapter
 import com.kfadli.pminister.activity.detail.adapter.ImagePagerAdapter
 import com.kfadli.pminister.activity.detail.fragment.content.AdvertsFragment
 import com.kfadli.pminister.activity.detail.fragment.content.EditoFragment
@@ -29,82 +30,63 @@ import javax.inject.Inject
 
 class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailView {
 
-    @Inject
-    lateinit var apiService: ProductsApiInterface
+  @Inject
+  lateinit var apiService: ProductsApiInterface
 
-    lateinit override var presenter: IDetailPresenter
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-        setSupportActionBar(toolbar)
-
-        presenter = DetailPresenter(this, apiService)
+  lateinit override var presenter: IDetailPresenter
 
 
-        //Prepare LayoutParams
-        val layoutParams = ViewPager.LayoutParams()
-        layoutParams.width = LayoutParams.MATCH_PARENT
-        layoutParams.height = LayoutParams.WRAP_CONTENT
-        layoutParams.gravity = Gravity.BOTTOM
+  override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
 
-        //add ViewPagerIndicator gallery bottom
-        val viewPagerIndicator = ViewPagerIndicator(this)
-        viewPagerIndicator.selectedDotColor = Color.BLACK
-        gallery_viewpager.addView(viewPagerIndicator, layoutParams)
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_detail)
+    setSupportActionBar(toolbar)
 
-        //Disable HorizontalScroll
-        viewPager.setOnTouchListener({ v, event -> true })
+    presenter = DetailPresenter(this, apiService)
 
-    }
 
-    override fun onDataReceived(product: ResultDetail?) {
+    //Prepare LayoutParams
+    val layoutParams = ViewPager.LayoutParams()
+    layoutParams.width = LayoutParams.MATCH_PARENT
+    layoutParams.height = LayoutParams.WRAP_CONTENT
+    layoutParams.gravity = Gravity.BOTTOM
 
-        //Find all url Images with LARGE format
-        val urls: List<String> = filterUrlByFormat(product?.images, "LARGE")
-        gallery_viewpager.adapter = ImagePagerAdapter(supportFragmentManager, urls)
+    //add ViewPagerIndicator gallery bottom
+    val viewPagerIndicator = ViewPagerIndicator(this)
+    viewPagerIndicator.selectedDotColor = Color.BLACK
+    gallery_viewpager.addView(viewPagerIndicator, layoutParams)
 
-        title_txt.text = product!!.headline
-        reviews_txt.text = product.nbReviews.toString()
-        best_price_txt.text = currencyFormat().format(product.summaryBestPrice!!.toDouble())
+    //Disable HorizontalScroll
+    viewPager.setOnTouchListener({ v, event -> true })
 
-        tabs_layout.setupWithViewPager(viewPager)
-        viewPager.adapter = ContentProductAdapter(supportFragmentManager, product)
+    //Setup Content ViewPager
+    tabs_layout.setupWithViewPager(viewPager)
 
-        score.rating = product.reviewsAverageNote?.toFloat()!!
-    }
+  }
 
-    override fun onDataFailed() {
-    }
+  /**
+   * Method handle Data from WebService
+   */
+  override fun onDataReceived(product: ResultDetail?) {
 
-    inner class ContentProductAdapter(fragmentManager: FragmentManager,
-                                      val product: ResultDetail) : FragmentStatePagerAdapter(fragmentManager) {
+    //Find all url Images with LARGE format
+    val urls: List<String> = filterUrlByFormat(product?.images, "LARGE")
+    gallery_viewpager.adapter = ImagePagerAdapter(supportFragmentManager, urls)
 
-        override fun getCount(): Int {
-            return 3
-        }
+    //Set some view properties
+    title_txt.text = product!!.headline
+    reviews_txt.text = product.nbReviews.toString()
+    best_price_txt.text = currencyFormat().format(product.summaryBestPrice!!.toDouble())
+    score.rating = product.reviewsAverageNote?.toFloat()!!
 
-        override fun getItem(position: Int): Fragment {
-            when (position) {
-                0 -> return AdvertsFragment.newInstance(product.adverts!!)
-                1 -> return ReviewsFragment.newInstance(product.reviews)
-                2 -> return EditoFragment.newInstance(product.edito!!)
-            }
+    viewPager.adapter = ContentProductAdapter(this, supportFragmentManager, product)
+  }
 
-            return Fragment()
-        }
+  /**
+   * Method handle failed to retrieve Data from WebService
+   */
+  override fun onDataFailed() {
+  }
 
-        override fun getPageTitle(position: Int): CharSequence? {
-            when (position) {
-                0 -> return getString(R.string.adverts).toUpperCase()
-                1 -> return getString(R.string.reviews).toUpperCase()
-                2 -> return getString(R.string.edito).toUpperCase()
-            }
-
-            return ""
-        }
-    }
 }
