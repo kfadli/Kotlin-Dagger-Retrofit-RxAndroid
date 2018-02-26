@@ -38,7 +38,7 @@ class EditoFragment : Fragment() {
   private fun edito(edito: String?, textView: TextView) {
     if (VERSION.SDK_INT >= VERSION_CODES.N) {
       textView.text = Html.fromHtml(edito, Html.FROM_HTML_MODE_COMPACT,
-          TextViewUtils.PicassoImageGetter(edito_html_txt), null)
+          TextViewUtils.PicassoImageGetter(edito_html_txt), null) ?: ""
     } else {
       textView.text = Html.fromHtml(edito)
     }

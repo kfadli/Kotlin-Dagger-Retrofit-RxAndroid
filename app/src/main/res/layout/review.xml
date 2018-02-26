@@ -57,11 +57,11 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/username_txt"
+      app:layout_constraintTop_toBottomOf="@+id/sells_review_txt"
       tools:text="@sample/product_detail.json/result/reviews/description" />
 
   <TextView
-      android:id="@+id/username_txt"
+      android:id="@+id/sells_review_txt"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="8dp"
@@ -80,7 +80,7 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:text="TextView"
-      app:layout_constraintStart_toEndOf="@+id/username_txt"
+      app:layout_constraintStart_toEndOf="@+id/sells_review_txt"
       app:layout_constraintTop_toBottomOf="@+id/score"
       tools:text="@sample/product_detail.json/result/reviews/date"
       />

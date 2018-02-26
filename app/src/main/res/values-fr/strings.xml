@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PriceMinister</string>
-    <string name="search_menu">Rechercher</string>
-    <string name="action_settings">Settings</string>
-    <string name="edito">edito</string>
-    <string name="reviews">avis</string>
-    <string name="adverts">offres</string>
+  <string name="app_name">PriceMinister</string>
+  <string name="search_menu">Rechercher</string>
+  <string name="action_settings">Settings</string>
+  <string name="edito">edito</string>
+  <string name="reviews">avis</string>
+  <string name="adverts">offres</string>
+  <string name="new_seller">Nouveau vendeur</string>
+  <string name="sells">ventes</string>
+  <string name="quality_acceptable">Acceptable</string>
+  <string name="quality_like_new">Comme neuf</string>
+  <string name="quality_very_good">Très bon état</string>
+  <string name="quality_new">Neuf</string>
+  <string name="average_seller">%1$s /5 - %2$d ventes</string>
 </resources>

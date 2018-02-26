@@ -10,8 +10,8 @@ import com.kfadli.pminister.response.ReviewsItem
 import kotlinx.android.synthetic.main.review.view.date_txt
 import kotlinx.android.synthetic.main.review.view.description
 import kotlinx.android.synthetic.main.review.view.score
+import kotlinx.android.synthetic.main.review.view.sells_review_txt
 import kotlinx.android.synthetic.main.review.view.title_txt
-import kotlinx.android.synthetic.main.review.view.username_txt
 import java.util.Date
 
 class RecyclerReviewAdapter(
@@ -37,7 +37,7 @@ class RecyclerReviewAdapter(
 
     fun bind(review: ReviewsItem?) {
       itemView.title_txt.text = review?.title ?: ""
-      itemView.username_txt.text = review!!.author?.login ?: ""
+      itemView.sells_review_txt.text = review!!.author?.login ?: ""
       itemView.score.rating = review.note?.toFloat() ?: 0.0f
       itemView.description.text = review.description
       itemView.date_txt.text = Date(review.date!!).toString()

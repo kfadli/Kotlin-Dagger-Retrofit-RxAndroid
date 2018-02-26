@@ -45,7 +45,7 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
         presenter = DetailPresenter(this, apiService)
 
 
-        //prepare LayoutParams
+        //Prepare LayoutParams
         val layoutParams = ViewPager.LayoutParams()
         layoutParams.width = LayoutParams.MATCH_PARENT
         layoutParams.height = LayoutParams.WRAP_CONTENT
@@ -56,12 +56,14 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
         viewPagerIndicator.selectedDotColor = Color.BLACK
         gallery_viewpager.addView(viewPagerIndicator, layoutParams)
 
+        //Disable HorizontalScroll
         viewPager.setOnTouchListener({ v, event -> true })
 
     }
 
     override fun onDataReceived(product: ResultDetail?) {
 
+        //Find all url Images with LARGE format
         val urls: List<String> = filterUrlByFormat(product?.images, "LARGE")
         gallery_viewpager.adapter = ImagePagerAdapter(supportFragmentManager, urls)
 
@@ -104,6 +106,5 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
             return ""
         }
-
     }
 }

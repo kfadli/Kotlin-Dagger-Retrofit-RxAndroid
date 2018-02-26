@@ -13,38 +13,38 @@ import com.kfadli.pminister.activity.detail.adapter.RecyclerAdvertsAdapter
 import com.kfadli.pminister.response.AdvertsItem
 
 
-
 class AdvertsFragment : Fragment() {
 
-    lateinit var advertsList: List<AdvertsItem?>
+  lateinit var advertsList: List<AdvertsItem?>
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
-    Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
+  Bundle?): View? {
 
-        // Creates the view controlled by the fragment
-        val view = inflater.inflate(R.layout.fragment_reviews, container, false)
+    // Creates the view controlled by the fragment
+    val view = inflater.inflate(R.layout.fragment_reviews, container, false)
 
 
-        val reviews_recycler = view.findViewById<RecyclerView>(R.id.reviews_recycler)
+    val reviews_recycler = view.findViewById<RecyclerView>(R.id.reviews_recycler)
 
-        reviews_recycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        reviews_recycler.setHasFixedSize(true)
-        reviews_recycler.layoutManager = LinearLayoutManager(context)
+    //Setup recycler View
+    reviews_recycler.addItemDecoration(
+        DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+    reviews_recycler.layoutManager = LinearLayoutManager(context)
+    reviews_recycler.adapter = RecyclerAdvertsAdapter(advertsList, context!!)
 
-        reviews_recycler.adapter = RecyclerAdvertsAdapter(advertsList)
+    return view
+  }
 
-        return view
+  companion object {
+
+    fun newInstance(reviews: List<AdvertsItem?>?): AdvertsFragment {
+
+      // Create a new AdvertFragment and set the Bundle as the arguments
+      val fragment = AdvertsFragment()
+      fragment.advertsList = reviews!!
+
+      return fragment
     }
-
-    companion object {
-
-        fun newInstance(reviews: List<AdvertsItem?>?): AdvertsFragment {
-            // Create a new ReviewsFragment and set the Bundle as the arguments
-            val fragment = AdvertsFragment()
-            fragment.advertsList = reviews!!
-
-            return fragment
-        }
-    }
+  }
 }

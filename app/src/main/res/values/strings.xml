@@ -6,4 +6,11 @@
   <string name="reviews">reviews</string>
   <string name="edito">edito</string>
   <string name="adverts">offers</string>
+  <string name="new_seller">New seller</string>
+  <string name="sells">sells</string>
+  <string name="quality_acceptable">Acceptable</string>
+  <string name="quality_like_new">Like new</string>
+  <string name="quality_very_good">Very good</string>
+  <string name="quality_new">Very good</string>
+  <string name="average_seller">%1$s /5 - %2$d sells</string>
 </resources>
