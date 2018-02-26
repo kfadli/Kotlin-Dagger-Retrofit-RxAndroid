@@ -2,6 +2,7 @@ package com.kfadli.pminister.activity.base.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -13,38 +14,44 @@ import com.kfadli.pminister.util.loadUrl
 
 class ImageFragment : Fragment() {
 
-  private lateinit var listener: OnClickListener
+    val TAG = "ImageFragment"
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
-  Bundle?): View? {
+    private lateinit var listener: OnClickListener
 
-    // Creates the view controlled by the fragment
-    val view = inflater.inflate(R.layout.fragment_image, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
+    Bundle?): View? {
+        Log.d(TAG, "[onCreateView]")
 
-    val imageView = view.findViewById<ImageView>(R.id.image_gallery)
 
-    // Retrieve and display the image data from the Bundle
-    val args = arguments
+        // Creates the view controlled by the fragment
+        val view = inflater.inflate(R.layout.fragment_image, container, false)
 
-    // Download the image and display it using Picasso
-    imageView.loadUrl(args!!.getString(Constant.IMAGE_URL))
-    imageView.setOnClickListener(listener)
+        val imageView = view.findViewById<ImageView>(R.id.image_gallery)
 
-    return view
-  }
+        // Retrieve and display the image data from the Bundle
+        val args = arguments
 
-  companion object {
+        // Download the image and display it using Picasso
+        imageView.loadUrl(args!!.getString(Constant.IMAGE_URL))
+        imageView.setOnClickListener(listener)
 
-    fun newInstance(image: String, listener: OnClickListener): ImageFragment {
-
-      val args = Bundle()
-      args.putString(Constant.IMAGE_URL, image)
-
-      // Create a new ImageFragment and set the Bundle as the arguments
-      val fragment = ImageFragment()
-      fragment.arguments = args
-      fragment.listener = listener
-      return fragment
+        return view
     }
-  }
+
+    companion object {
+
+        fun newInstance(image: String, listener: OnClickListener): ImageFragment {
+
+            Log.d("ImageFragment", "[newInstance]")
+            val args = Bundle()
+            args.putString(Constant.IMAGE_URL, image)
+
+            // Create a new ImageFragment and set the Bundle as the arguments
+            val fragment = ImageFragment()
+            fragment.arguments = args
+            fragment.listener = listener
+            fragment.retainInstance = true
+            return fragment
+        }
+    }
 }

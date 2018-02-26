@@ -51,6 +51,7 @@ class EditoFragment : Fragment() {
       // Create a new ImageFragment and set the Bundle as the arguments
       val fragment = EditoFragment()
       fragment.content = edito!!
+      fragment.retainInstance = true
 
       return fragment
     }

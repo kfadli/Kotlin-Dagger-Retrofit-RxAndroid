@@ -80,27 +80,29 @@
           app:layout_constraintTop_toBottomOf="@+id/username_txt"
           tools:text="@sample/product_detail.json/result/adverts/seller/login"
           />
+
       <me.zhanghai.android.materialratingbar.MaterialRatingBar
-          android:visibility="invisible"
           android:id="@+id/score"
-          android:layout_width="120dp"
+          style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+          android:layout_width="wrap_content"
           android:layout_height="20dp"
-          android:layout_marginBottom="8dp"
-          android:layout_marginLeft="120dp"
-          android:layout_marginStart="120dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:layout_marginStart="8dp"
           android:layout_marginTop="12dp"
           android:maxHeight="20dp"
           android:minHeight="20dp"
           android:numStars="5"
           android:rating="4.5"
           android:stepSize="0.5"
+          android:visibility="invisible"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/title_txt"
           app:mrb_fillBackgroundStars="false"
           app:mrb_progressTint="@color/yellow_star"
-          app:mrb_secondaryProgressTint="@color/grey_star"
-          style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
-          />
+          app:mrb_secondaryProgressTint="@color/grey_star" />
 
       <TextView
           android:id="@+id/reviews_txt"
@@ -159,6 +161,13 @@
           android:orientation="horizontal"
           app:layout_constraintGuide_end="8dp"
           />
+
+      <android.support.constraint.Guideline
+          android:id="@+id/guideline3"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.5" />
 
 
     </android.support.constraint.ConstraintLayout>

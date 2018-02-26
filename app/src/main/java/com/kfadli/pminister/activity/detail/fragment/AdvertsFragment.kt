@@ -43,6 +43,7 @@ class AdvertsFragment : Fragment() {
 
       // Create a new AdvertFragment and set the Bundle as the arguments
       val fragment = AdvertsFragment()
+      fragment.retainInstance = true
 
       //Drop first element (offer already display on header)
       fragment.advertsList = advertsList!!.drop(1)

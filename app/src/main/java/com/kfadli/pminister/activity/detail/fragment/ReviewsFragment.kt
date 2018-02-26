@@ -14,35 +14,36 @@ import com.kfadli.pminister.response.ReviewsItem
 
 class ReviewsFragment : Fragment() {
 
-  lateinit var reviews: List<ReviewsItem?>
+    lateinit var reviews: List<ReviewsItem?>
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
+    Bundle?): View? {
+
+        // Creates the view controlled by the fragment
+        val view = inflater.inflate(R.layout.fragment_reviews, container, false)
 
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
-  Bundle?): View? {
+        val reviews_recycler = view.findViewById<RecyclerView>(R.id.reviews_recycler)
 
-    // Creates the view controlled by the fragment
-    val view = inflater.inflate(R.layout.fragment_reviews, container, false)
+        reviews_recycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        reviews_recycler.setHasFixedSize(true)
+        reviews_recycler.layoutManager = LinearLayoutManager(context)
 
+        reviews_recycler.adapter = RecyclerReviewAdapter(reviews)
 
-    val reviews_recycler = view.findViewById<RecyclerView>(R.id.reviews_recycler)
-
-    reviews_recycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-    reviews_recycler.setHasFixedSize(true)
-    reviews_recycler.layoutManager = LinearLayoutManager(context)
-
-    reviews_recycler.adapter = RecyclerReviewAdapter(reviews)
-
-    return view
-  }
-
-  companion object {
-
-    fun newInstance(reviews: List<ReviewsItem?>?): ReviewsFragment {
-
-      // Create a new ReviewsFragment and set the Bundle as the arguments
-      val fragment = ReviewsFragment()
-      fragment.reviews = reviews!!
-      return fragment
+        return view
     }
-  }
+
+    companion object {
+
+        fun newInstance(reviews: List<ReviewsItem?>?): ReviewsFragment {
+
+            // Create a new ReviewsFragment and set the Bundle as the arguments
+            val fragment = ReviewsFragment()
+            fragment.retainInstance = true
+            fragment.reviews = reviews!!
+            return fragment
+        }
+    }
+
 }
