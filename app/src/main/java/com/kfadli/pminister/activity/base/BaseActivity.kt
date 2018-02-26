@@ -45,4 +45,5 @@ abstract class BaseActivity<in V : IView, T : IPresenter<V>> : AppCompatActivity
     }
   }
 
+
 }

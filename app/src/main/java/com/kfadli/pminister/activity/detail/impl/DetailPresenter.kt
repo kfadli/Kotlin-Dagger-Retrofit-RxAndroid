@@ -17,11 +17,16 @@ class DetailPresenter(var view: IDetailView, var api: ProductsApiInterface) : ID
   override fun fetchData() {
     disposables.add(
         api.getProductDetail()
+            .filter({ view != null })
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ t -> view.onDataReceived(t.result) },
+            .subscribe({ t ->
+              view.hideLoader()
+              view.onDataReceived(t.result)
+            },
                 { t ->
                   Log.d(TAG, "[subscribe] failed", t)
+                  view.hideLoader()
                   view.onDataFailed()
                 }))
   }

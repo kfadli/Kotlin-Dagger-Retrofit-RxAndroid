@@ -20,6 +20,8 @@ import com.kfadli.pminister.activity.gallery.GalleryActivity
 import com.kfadli.pminister.api.ProductsApiInterface
 import com.kfadli.pminister.response.ResultDetail
 import com.kfadli.pminister.util.Constant
+import com.kfadli.pminister.util.FormatEnum.LARGE
+import com.kfadli.pminister.util.FormatEnum.ORIGINAL
 import com.kfadli.pminister.util.QualityEnum
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.filterUrlByFormat
@@ -27,8 +29,10 @@ import com.kfadli.pminister.util.formatSellsAndReviews
 import com.kfadli.pminister.util.toString
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_detail.gallery_viewpager
+import kotlinx.android.synthetic.main.activity_detail.progressBar
 import kotlinx.android.synthetic.main.activity_detail.toolbar
 import kotlinx.android.synthetic.main.content_detail.best_price_txt
+import kotlinx.android.synthetic.main.content_detail.label_recommendation
 import kotlinx.android.synthetic.main.content_detail.quality_product_txt
 import kotlinx.android.synthetic.main.content_detail.reviews_txt
 import kotlinx.android.synthetic.main.content_detail.score
@@ -57,7 +61,6 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
     presenter = DetailPresenter(this, apiService)
 
-
     //Prepare LayoutParams
     val layoutParams = ViewPager.LayoutParams()
     layoutParams.width = LayoutParams.MATCH_PARENT
@@ -74,7 +77,6 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
     //Setup Content ViewPager
     tabs_layout.setupWithViewPager(viewPager)
-
     presenter.fetchData()
   }
 
@@ -84,12 +86,12 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
   override fun onDataReceived(product: ResultDetail?) {
 
     //Find all url Images with LARGE format
-    val urls: ArrayList<String> = filterUrlByFormat(product?.images, "LARGE")
+    val urls: ArrayList<String> = filterUrlByFormat(product?.images, LARGE.toString())
 
     gallery_viewpager.adapter = ImagePagerAdapter(
         supportFragmentManager, urls, View.OnClickListener { v ->
 
-      val originalUrl: ArrayList<String> = filterUrlByFormat(product?.images, "ORIGINAL")
+      val originalUrl: ArrayList<String> = filterUrlByFormat(product?.images, ORIGINAL.toString())
       val intent = Intent(getContext(), GalleryActivity::class.java)
       intent.putStringArrayListExtra(Constant.IMAGE_URLS, originalUrl)
 
@@ -98,7 +100,10 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
 
     val bestOffer = product!!.adverts!![0]
+
     //Set some view properties
+    score.visibility = View.VISIBLE
+    label_recommendation.text = getString(R.string.recommended_offer)
     title_txt.text = product.headline
     reviews_txt.text = "${product.nbReviews.toString()} ${getString(R.string.reviews)}"
     best_price_txt.text = currencyFormat().format(product.summaryBestPrice!!.toDouble())
@@ -116,7 +121,9 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
   override fun onDataFailed() {
     val dialogBuilder = Builder(this).create()
     dialogBuilder.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.retry),
-        { dialog, which -> presenter.fetchData(); dialog.dismiss() })
+        { dialog, which ->
+          presenter.fetchData(); dialog.dismiss()
+        })
     dialogBuilder.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
         { dialog, which -> dialog.dismiss() })
     dialogBuilder.setMessage(getString(R.string.something_went_wrong))
@@ -124,5 +131,13 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
     if (!isFinishing) {
       dialogBuilder.show()
     }
+  }
+
+  override fun showLoader() {
+    progressBar.visibility = View.VISIBLE
+  }
+
+  override fun hideLoader() {
+    progressBar.visibility = View.INVISIBLE
   }
 }

@@ -15,4 +15,8 @@ interface IView {
 
   fun showMessage(message: String)
 
+  fun showLoader()
+
+  fun hideLoader()
+
 }

@@ -17,10 +17,17 @@ class MainPresenter(var view: IMainView, var api: ProductsApiInterface) : IMainP
   override fun subscribe() {
     disposables.add(
         api.getProductsList()
+            .filter({ view != null })
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ t -> view.onDataReceived(t.result?.products) },
-                { view.onDataFailed() }))
+            .subscribe({ t ->
+              view.hideLoader()
+              view.onDataReceived(t.result?.products)
+            },
+                {
+                  view.hideLoader()
+                  view.onDataFailed()
+                }))
   }
 
   override fun unsubscribe() {
