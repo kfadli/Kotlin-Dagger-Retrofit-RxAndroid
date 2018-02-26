@@ -1,11 +1,13 @@
 package com.kfadli.pminister.activity.detail.impl
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog.Builder
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup.LayoutParams
 import com.itsronald.widget.ViewPagerIndicator
 import com.kfadli.pminister.R
@@ -14,8 +16,10 @@ import com.kfadli.pminister.activity.base.adapter.ImagePagerAdapter
 import com.kfadli.pminister.activity.detail.IDetailPresenter
 import com.kfadli.pminister.activity.detail.IDetailView
 import com.kfadli.pminister.activity.detail.adapter.ContentProductAdapter
+import com.kfadli.pminister.activity.gallery.GalleryActivity
 import com.kfadli.pminister.api.ProductsApiInterface
 import com.kfadli.pminister.response.ResultDetail
+import com.kfadli.pminister.util.Constant
 import com.kfadli.pminister.util.QualityEnum
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.filterUrlByFormat
@@ -80,9 +84,17 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
   override fun onDataReceived(product: ResultDetail?) {
 
     //Find all url Images with LARGE format
-    val urls: List<String> = filterUrlByFormat(product?.images, "LARGE")
+    val urls: ArrayList<String> = filterUrlByFormat(product?.images, "LARGE")
+
     gallery_viewpager.adapter = ImagePagerAdapter(
-        supportFragmentManager, urls)
+        supportFragmentManager, urls, View.OnClickListener { v ->
+
+      val originalUrl: ArrayList<String> = filterUrlByFormat(product?.images, "ORIGINAL")
+      val intent = Intent(getContext(), GalleryActivity::class.java)
+      intent.putStringArrayListExtra(Constant.IMAGE_URLS, originalUrl)
+
+      startActivity(intent)
+    })
 
 
     val bestOffer = product!!.adverts!![0]

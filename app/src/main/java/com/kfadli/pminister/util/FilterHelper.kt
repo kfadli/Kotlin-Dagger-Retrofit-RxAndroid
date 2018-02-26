@@ -4,7 +4,7 @@ import com.kfadli.pminister.response.ImagesItem
 
 
 fun filterUrlByFormat(
-    imagesItem: List<ImagesItem?>?, format: String): List<String> {
+    imagesItem: List<ImagesItem?>?, format: String): ArrayList<String> {
 
   val urls = ArrayList<String>()
 
