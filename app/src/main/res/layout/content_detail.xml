@@ -144,6 +144,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/best_price_txt"
           tools:text="@sample/product_detail.json/result/bestOffers/new/adverts/quality"
+          style="@style/price"
 
           />
       <android.support.constraint.Guideline
