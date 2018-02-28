@@ -6,88 +6,91 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 android {
-  compileSdkVersion 26
-  defaultConfig {
-    applicationId "com.kfadli.pminister"
-    minSdkVersion 16
-    targetSdkVersion 26
-    versionCode 1
-    versionName "1.0"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.kfadli.pminister"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 kapt {
-  generateStubs = true
+    generateStubs = true
 }
 
 buildscript {
-  ext.daggerVersion = '2.13'
-  ext.retrofitVersion = '2.3.0'
-  ext.support_version = '26.1.0'
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-  dependencies {
-    classpath "io.realm:realm-gradle-plugin:2.1.1"
-  }
+    ext.daggerVersion = '2.13'
+    ext.retrofitVersion = '2.3.0'
+    ext.support_version = '26.1.0'
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "io.realm:realm-gradle-plugin:2.1.1"
+    }
 }
 
 dependencies {
 
-  //MaterialRatingBar
-  implementation 'me.zhanghai.android.materialratingbar:library:1.2.0'
+    //MaterialRatingBar
+    implementation 'me.zhanghai.android.materialratingbar:library:1.2.0'
 
-  //Picasso
-  implementation 'com.squareup.picasso:picasso:2.5.2'
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
-  //PagerIndicator
-  implementation 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
+    //PagerIndicator
+    implementation 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
 
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
-  //RxJava
-  implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
-  implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //Dagger
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    provided 'org.glassfish:javax.annotation:3.1.1'
 
-  //Dagger
-  implementation "com.google.dagger:dagger:${daggerVersion}"
-  implementation "com.google.dagger:dagger-android:$daggerVersion"
-  kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
-  kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    //Retrofit 2
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
 
-  annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    //OKIO
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okio:okio:1.13.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-  provided "org.glassfish:javax.annotation:3.1.1"
+    //Support
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:recyclerview-v7:$support_version"
+    implementation "com.android.support:design:$support_version"
 
-  //Retrofit 2
-  implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-  implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
-  implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    //Test
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta5'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.8.9'
+    androidTestCompile 'org.mockito:mockito-android:2.8.9'
 
-
-  //OKIO
-  implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-  implementation 'com.squareup.okio:okio:1.13.0'
-  implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
-  //Support
-  implementation "com.android.support:appcompat-v7:$support_version"
-  implementation "com.android.support:recyclerview-v7:$support_version"
-  implementation "com.android.support:design:$support_version"
-
-  //Test
-  implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
-  testImplementation 'junit:junit:4.12'
-  androidTestImplementation 'com.android.support.test:runner:1.0.1'
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
