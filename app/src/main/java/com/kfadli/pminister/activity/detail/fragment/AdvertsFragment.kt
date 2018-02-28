@@ -46,26 +46,40 @@ class AdvertsFragment : Fragment() {
     val advertsAvailable = view.findViewById<TextView>(R.id.adverts_available)
 
     //Handle AdvertType Filter
-    val disable_filter = view.findViewById<Button>(R.id.filter_disable_btn)
-    val new_filter = view.findViewById<Button>(R.id.filter_new_btn)
-    val used_filter = view.findViewById<Button>(R.id.filter_used_btn)
+    val disablefilter = view.findViewById<Button>(R.id.filter_disable_btn)
+    val newfilter = view.findViewById<Button>(R.id.filter_new_btn)
+    val usedfilter = view.findViewById<Button>(R.id.filter_used_btn)
+
 
     val listener = FilterListener { count ->
-      advertsAvailable.setText(getString(R.string.advert_available, count))
+      advertsAvailable.text = getString(R.string.advert_available, count)
     }
 
-    disable_filter.setOnClickListener { v -> adapter.filter.filter("", listener) }
-    new_filter.setOnClickListener { v ->
+    //Update Filter and buttons state
+    disablefilter.setOnClickListener { v ->
+      adapter.filter.filter("", listener)
+      v.isEnabled = false
+      newfilter.isEnabled = true
+      usedfilter.isEnabled = true
+    }
+
+    newfilter.setOnClickListener { v ->
       adapter.filter.filter(AdvertTypeEnum.NEW.name, listener)
+      v.isEnabled = false
+      usedfilter.isEnabled = true
+      disablefilter.isEnabled = true
     }
-    used_filter.setOnClickListener { v ->
+    usedfilter.setOnClickListener { v ->
       adapter.filter.filter(AdvertTypeEnum.USED.name, listener)
+      v.isEnabled = false
+      newfilter.isEnabled = true
+      disablefilter.isEnabled = true
     }
 
+    disablefilter.isEnabled = false
     adapter.filter.filter("", listener)
 
   }
-
 
   companion object {
 

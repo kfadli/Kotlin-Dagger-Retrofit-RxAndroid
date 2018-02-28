@@ -27,8 +27,8 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:mrb_fillBackgroundStars="false"
-      app:mrb_progressTint="@color/yellow_star"
-      app:mrb_secondaryProgressTint="@color/grey_star" />
+      app:mrb_progressTint="@color/yellow"
+      app:mrb_secondaryProgressTint="@color/grey_dark" />
 
   <TextView
       android:id="@+id/title_txt"

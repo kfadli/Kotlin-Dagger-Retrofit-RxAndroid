@@ -101,8 +101,8 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/title_txt"
           app:mrb_fillBackgroundStars="false"
-          app:mrb_progressTint="@color/yellow_star"
-          app:mrb_secondaryProgressTint="@color/grey_star" />
+          app:mrb_progressTint="@color/yellow"
+          app:mrb_secondaryProgressTint="@color/grey_dark" />
 
       <TextView
           android:id="@+id/reviews_txt"
@@ -180,9 +180,9 @@
         android:minHeight="?attr/actionBarSize"
         app:tabBackground="@android:color/transparent"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/tabs_color"
+        app:tabIndicatorColor="@color/pretty_blue"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/tabs_color"
+        app:tabSelectedTextColor="@color/pretty_blue"
         app:tabTextColor="@android:color/secondary_text_light"
         />
 

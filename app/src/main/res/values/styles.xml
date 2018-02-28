@@ -6,7 +6,7 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:textColorPrimary">@color/colorWhite</item>
+    <item name="android:textColorPrimary">@color/white</item>
   </style>
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
@@ -14,7 +14,7 @@
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
   <style name="seller" parent="@android:style/Widget.TextView">
-    <item name="android:textColor">@color/colorSeller</item>
+    <item name="android:textColor">@color/pretty_blue</item>
   </style>
 
   <style name="price" parent="@android:style/Widget.TextView">
@@ -23,7 +23,13 @@
 
 
   <style name="error_dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="android:textColor">@color/colorSeller</item>
+    <item name="android:textColor">@color/pretty_blue</item>
   </style>
 
+  <style name="filter_button" parent="@style/Widget.AppCompat.Button.Borderless">
+    <item name="android:textAllCaps">true</item>
+    <item name="android:background">@drawable/filter_button_drawable</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:padding">0dp</item>
+  </style>
 </resources>

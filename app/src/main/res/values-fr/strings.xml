@@ -20,4 +20,7 @@
   <string name="application_has_encountered_error">L\'application a rencontré une erreur inconnue</string>
   <string name="new_product">Neuf</string>
   <string name="used_product">Occasion</string>
+  <string name="all">Tout</string>
+  <string name="advert_available">%1$d annonces disponibles</string>
+
 </resources>
