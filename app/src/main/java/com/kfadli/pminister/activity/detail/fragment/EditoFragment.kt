@@ -34,7 +34,7 @@ class EditoFragment : Fragment() {
     val textView = view.findViewById<TextView>(R.id.edito_html_txt)
 
     if (savedInstanceState != null) {
-      content = savedInstanceState.getString(Constant.ADVERTS_PARCELABLE)
+      content = savedInstanceState.getString(Constant.EDITO_PARCELABLE)
     }
 
     edito(content, textView)
