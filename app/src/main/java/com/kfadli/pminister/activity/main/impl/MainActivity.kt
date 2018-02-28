@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
   private val TAG: String = "MainActivity"
 
 
-  lateinit override var presenter: IMainPresenter
+  override lateinit var presenter: IMainPresenter
 
   private lateinit var searchView: SearchView
   private lateinit var adapter: RecyclerProductsAdapter

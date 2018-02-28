@@ -49,7 +49,7 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
   @Inject
   lateinit var apiService: ProductsApiInterface
 
-  lateinit override var presenter: IDetailPresenter
+  override lateinit var presenter: IDetailPresenter
 
 
   override fun onCreate(savedInstanceState: Bundle?) {

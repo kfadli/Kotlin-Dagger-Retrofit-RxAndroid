@@ -1,6 +1,5 @@
 package com.kfadli.pminister.activity.detail.impl
 
-import android.util.Log
 import com.kfadli.pminister.activity.detail.IDetailPresenter
 import com.kfadli.pminister.activity.detail.IDetailView
 import com.kfadli.pminister.api.ProductsApiInterface
@@ -25,7 +24,6 @@ class DetailPresenter(var view: IDetailView, var api: ProductsApiInterface) : ID
               view.onDataReceived(t.result)
             },
                 { t ->
-                  Log.d(TAG, "[subscribe] failed", t)
                   view.hideLoader()
                   view.onDataFailed()
                 }))
