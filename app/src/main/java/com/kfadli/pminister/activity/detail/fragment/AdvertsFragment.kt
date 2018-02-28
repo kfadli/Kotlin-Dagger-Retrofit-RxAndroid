@@ -15,17 +15,18 @@ import com.kfadli.pminister.R
 import com.kfadli.pminister.activity.detail.adapter.RecyclerAdvertsAdapter
 import com.kfadli.pminister.enums.AdvertTypeEnum
 import com.kfadli.pminister.response.AdvertsItem
+import com.kfadli.pminister.util.Constant
 
 
 class AdvertsFragment : Fragment() {
 
-  lateinit var advertsList: List<AdvertsItem?>
+  lateinit var advertsList: ArrayList<AdvertsItem?>
   lateinit var adapter: RecyclerAdvertsAdapter
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
   Bundle?): View? {
 
-    // Creates the view controlled by the fragment
+    //Creates the view controlled by the fragment
     val view = inflater.inflate(R.layout.fragment_adverts, container, false)
 
     val adverts_recycler = view.findViewById<RecyclerView>(R.id.adverts_recycler)
@@ -34,10 +35,20 @@ class AdvertsFragment : Fragment() {
         DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     adverts_recycler.layoutManager = LinearLayoutManager(context)
 
+    //Reload data from state
+    if (savedInstanceState != null) {
+      advertsList = savedInstanceState.getParcelableArrayList(Constant.ADVERTS_PARCELABLE)
+    }
+
     adapter = RecyclerAdvertsAdapter(advertsList, context!!)
     adverts_recycler.adapter = adapter
 
     return view
+  }
+
+  override fun onSaveInstanceState(outState: Bundle) {
+    super.onSaveInstanceState(outState)
+    outState.putParcelableArrayList(Constant.ADVERTS_PARCELABLE, advertsList)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +66,7 @@ class AdvertsFragment : Fragment() {
       advertsAvailable.text = getString(R.string.advert_available, count)
     }
 
-    //Update Filter and buttons state
+    //Update Filter and buttons state (can be optimized...)
     disablefilter.setOnClickListener { v ->
       adapter.filter.filter("", listener)
       v.isEnabled = false
@@ -90,7 +101,7 @@ class AdvertsFragment : Fragment() {
       fragment.retainInstance = true
 
       //Drop first element (offer already display on header)
-      fragment.advertsList = advertsList!!.drop(1)
+      fragment.advertsList = advertsList!!.drop(1) as ArrayList<AdvertsItem?>
 
       return fragment
     }

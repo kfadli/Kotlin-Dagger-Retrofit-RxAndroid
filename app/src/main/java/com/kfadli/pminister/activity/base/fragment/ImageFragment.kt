@@ -16,7 +16,7 @@ class ImageFragment : Fragment() {
 
     val TAG = "ImageFragment"
 
-    private lateinit var listener: OnClickListener
+    private var listener: OnClickListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
     Bundle?): View? {

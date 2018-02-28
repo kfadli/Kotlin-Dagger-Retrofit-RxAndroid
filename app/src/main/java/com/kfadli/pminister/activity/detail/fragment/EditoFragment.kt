@@ -10,12 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.kfadli.pminister.R
+import com.kfadli.pminister.util.Constant
 import com.kfadli.pminister.util.TextViewUtils
 import kotlinx.android.synthetic.main.fragment_edito.edito_html_txt
 
 class EditoFragment : Fragment() {
 
-  lateinit var content: String
+  var content: String? = ""
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState:
   Bundle?): View? {
@@ -31,8 +32,18 @@ class EditoFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     val textView = view.findViewById<TextView>(R.id.edito_html_txt)
+
+    if (savedInstanceState != null) {
+      content = savedInstanceState.getString(Constant.ADVERTS_PARCELABLE)
+    }
+
     edito(content, textView)
 
+  }
+
+  override fun onSaveInstanceState(outState: Bundle) {
+    super.onSaveInstanceState(outState)
+    outState.putString(Constant.EDITO_PARCELABLE, content)
   }
 
   private fun edito(edito: String?, textView: TextView) {

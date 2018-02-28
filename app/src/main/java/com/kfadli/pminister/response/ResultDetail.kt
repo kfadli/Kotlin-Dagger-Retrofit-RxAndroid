@@ -1,7 +1,7 @@
 package com.kfadli.pminister.response
 
-import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
+import javax.annotation.Generated
 
 @Generated("com.robohorse.robopojogenerator")
 data class ResultDetail(
@@ -46,10 +46,10 @@ data class ResultDetail(
 	val newBestPriceByCluster: String? = null,
 
 	@field:SerializedName("adverts")
-	val adverts: List<AdvertsItem?>? = null,
+	val adverts: ArrayList<AdvertsItem?>? = null,
 
 	@field:SerializedName("reviews")
-	val reviews: List<ReviewsItem?>? = null,
+	val reviews: ArrayList<ReviewsItem?>? = null,
 
 	@field:SerializedName("productDetailTitle")
 	val productDetailTitle: String? = null,
