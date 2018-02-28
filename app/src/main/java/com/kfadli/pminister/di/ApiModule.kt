@@ -1,18 +1,18 @@
 package com.kfadli.pminister.di;
 
+import com.google.gson.GsonBuilder
 import com.kfadli.pminister.BuildConfig
-import com.kfadli.pminister.api.ProductsApiInterface;
+import com.kfadli.pminister.api.ProductsApiInterface
+import com.kfadli.pminister.util.Constant.BASE_URL_API
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import javax.inject.Singleton
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import com.google.gson.GsonBuilder
-import com.google.gson.Gson
-
+import java.util.concurrent.TimeUnit.SECONDS
+import javax.inject.Singleton
 
 
 @Module public class ApiModule {
@@ -25,6 +25,7 @@ import com.google.gson.Gson
       val httpLoggingInterceptor = HttpLoggingInterceptor()
       httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
       okHttpBuilder.addInterceptor(httpLoggingInterceptor)
+      okHttpBuilder.connectTimeout(30, SECONDS)
     }
 
     okHttpBuilder.addInterceptor({
@@ -40,7 +41,7 @@ import com.google.gson.Gson
 
 
     return Retrofit.Builder()
-        .baseUrl("https://api.myjson.com/bins/")
+        .baseUrl(BASE_URL_API)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(okHttpBuilder.build())
