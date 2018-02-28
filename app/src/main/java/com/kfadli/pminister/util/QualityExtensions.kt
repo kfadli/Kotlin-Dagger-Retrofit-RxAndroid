@@ -2,6 +2,7 @@ package com.kfadli.pminister.util
 
 import android.content.Context
 import com.kfadli.pminister.R
+import com.kfadli.pminister.enums.QualityEnum
 
 fun QualityEnum.toString(context: Context): String {
 

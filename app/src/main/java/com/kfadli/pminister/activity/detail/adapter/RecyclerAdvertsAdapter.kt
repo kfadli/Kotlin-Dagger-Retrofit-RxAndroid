@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import com.kfadli.pminister.R
+import com.kfadli.pminister.enums.QualityEnum
 import com.kfadli.pminister.response.AdvertsItem
-import com.kfadli.pminister.util.QualityEnum
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.formatSellsAndReviews
 import com.kfadli.pminister.util.toString
@@ -20,21 +22,61 @@ import kotlinx.android.synthetic.main.advert.view.username_txt
 class RecyclerAdvertsAdapter(
 
     private val adverts: List<AdvertsItem?>,
-    private val context: Context) : RecyclerView.Adapter<RecyclerAdvertsAdapter.AdvertHolder>() {
+    private val context: Context) : RecyclerView.Adapter<RecyclerAdvertsAdapter.AdvertHolder>(), Filterable {
+
+  private val advertsFiltered: ArrayList<AdvertsItem?> = ArrayList()
 
   private val TAG: String = "RecyclerAdvertsAdapter"
 
   override fun getItemCount(): Int {
-    return adverts.size
+    return advertsFiltered.size
   }
 
   override fun onBindViewHolder(holder: AdvertHolder, position: Int) {
-    holder.bind(adverts[position], context)
+    holder.bind(advertsFiltered[position], context)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AdvertHolder {
     return AdvertHolder(
         LayoutInflater.from(parent?.context).inflate(R.layout.advert, parent, false))
+  }
+
+  override fun getFilter(): Filter {
+
+    return object : Filter() {
+
+      private val filtered: ArrayList<AdvertsItem?> = ArrayList()
+
+      override fun performFiltering(constraint: CharSequence?): FilterResults {
+
+        filtered.clear()
+
+        if (constraint != null && constraint.isNotEmpty()) {
+          val query = constraint.toString()
+
+          adverts.forEach { t: AdvertsItem? ->
+            if (t!!.type!!.contentEquals(query)) {
+              filtered.add(t)
+            }
+          }
+        } else {
+          filtered.addAll(adverts)
+        }
+
+        return FilterResults().apply {
+          values = filtered
+          count = filtered.size
+        }
+      }
+
+      override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+        advertsFiltered.clear()
+        if (results != null) {
+          advertsFiltered.addAll(results.values as MutableList<AdvertsItem>)
+        }
+        notifyDataSetChanged()
+      }
+    }
   }
 
   class AdvertHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {

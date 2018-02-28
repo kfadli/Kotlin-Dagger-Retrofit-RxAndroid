@@ -17,11 +17,11 @@ import com.kfadli.pminister.activity.detail.IDetailView
 import com.kfadli.pminister.activity.detail.adapter.ContentProductAdapter
 import com.kfadli.pminister.activity.gallery.GalleryActivity
 import com.kfadli.pminister.api.ProductsApiInterface
+import com.kfadli.pminister.enums.FormatEnum.LARGE
+import com.kfadli.pminister.enums.FormatEnum.ORIGINAL
+import com.kfadli.pminister.enums.QualityEnum
 import com.kfadli.pminister.response.ResultDetail
 import com.kfadli.pminister.util.Constant
-import com.kfadli.pminister.util.FormatEnum.LARGE
-import com.kfadli.pminister.util.FormatEnum.ORIGINAL
-import com.kfadli.pminister.util.QualityEnum
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.filterUrlByFormat
 import com.kfadli.pminister.util.formatSellsAndReviews
@@ -114,6 +114,8 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
     //Populate content
     viewPager.adapter = ContentProductAdapter(this, supportFragmentManager, product)
+
+
   }
 
   /**

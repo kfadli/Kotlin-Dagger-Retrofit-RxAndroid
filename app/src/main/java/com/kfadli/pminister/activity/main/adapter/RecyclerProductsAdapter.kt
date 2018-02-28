@@ -14,11 +14,16 @@ import android.widget.Filterable
 import com.kfadli.pminister.R
 import com.kfadli.pminister.activity.detail.impl.DetailActivity
 import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter.ProductHolder
+import com.kfadli.pminister.enums.FormatEnum
 import com.kfadli.pminister.response.ProductsItem
-import com.kfadli.pminister.util.FormatEnum
 import com.kfadli.pminister.util.currencyFormat
 import com.kfadli.pminister.util.loadUrl
-import kotlinx.android.synthetic.main.product.view.*
+import kotlinx.android.synthetic.main.product.view.new_price_txt
+import kotlinx.android.synthetic.main.product.view.picture_img
+import kotlinx.android.synthetic.main.product.view.reviews_txt
+import kotlinx.android.synthetic.main.product.view.score
+import kotlinx.android.synthetic.main.product.view.title_txt
+import kotlinx.android.synthetic.main.product.view.used_price_txt
 
 class RecyclerProductsAdapter(
         private val products: List<ProductsItem?>?) : RecyclerView.Adapter<ProductHolder>(), Filterable {
