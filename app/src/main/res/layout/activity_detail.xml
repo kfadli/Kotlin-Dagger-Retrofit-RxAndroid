@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activity.detail.impl.DetailActivity">
+    android:background="@color/grey_light"
+    tools:context=".activity.detail.impl.DetailActivity"
+    >
 
   <android.support.design.widget.AppBarLayout
       android:id="@+id/app_bar"
       android:layout_width="match_parent"
-      android:layout_height="260dp"
+      android:layout_height="wrap_content"
       android:fitsSystemWindows="true"
-      android:theme="@style/AppTheme.AppBarOverlay">
+      android:theme="@style/AppTheme.AppBarOverlay"
+      >
 
     <android.support.design.widget.CollapsingToolbarLayout
         android:id="@+id/toolbar_layout"
@@ -20,34 +23,52 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         app:contentScrim="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:titleEnabled="false"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        >
 
-      <android.support.v4.view.ViewPager
-          android:id="@+id/gallery_viewpager"
+      <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_alignWithParentIfMissing="true"
-          android:background="@color/white"
-          app:layout_collapseMode="parallax"
-          app:layout_collapseParallaxMultiplier="0.7"
-          android:paddingBottom="30dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
           >
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/gallery_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignWithParentIfMissing="true"
+            android:background="@color/white"
+            android:paddingBottom="30dp"
+            app:layout_collapseMode="parallax"
+            app:layout_collapseParallaxMultiplier="0.7"
+            >
+        </android.support.v4.view.ViewPager>
 
-      </android.support.v4.view.ViewPager>
+        <include
+            layout="@layout/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+      </LinearLayout>
+
 
       <android.support.v7.widget.Toolbar
           android:id="@+id/toolbar"
           android:layout_width="match_parent"
           android:layout_height="?attr/actionBarSize"
           app:layout_collapseMode="pin"
-          app:popupTheme="@style/AppTheme.PopupOverlay" />
+          app:popupTheme="@style/AppTheme.PopupOverlay"
+          />
 
     </android.support.design.widget.CollapsingToolbarLayout>
+
+
   </android.support.design.widget.AppBarLayout>
 
-  <include layout="@layout/content_detail" />
+
+  <include layout="@layout/content_detail"/>
 
   <ProgressBar
       android:id="@+id/progressBar"

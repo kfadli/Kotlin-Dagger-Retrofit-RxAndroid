@@ -21,6 +21,10 @@
     <item name="android:textColor">@android:color/holo_red_dark</item>
   </style>
 
+  <style name="header_text">
+    <item name="android:textColor">@color/light_black</item>
+  </style>
+
 
   <style name="error_dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
     <item name="android:textColor">@color/pretty_blue</item>
@@ -31,5 +35,6 @@
     <item name="android:background">@drawable/filter_button_drawable</item>
     <item name="android:textSize">14sp</item>
     <item name="android:padding">0dp</item>
+    <item name="android:maxWidth">50dp</item>
   </style>
 </resources>

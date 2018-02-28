@@ -30,16 +30,16 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_detail.gallery_viewpager
 import kotlinx.android.synthetic.main.activity_detail.progressBar
 import kotlinx.android.synthetic.main.activity_detail.toolbar
-import kotlinx.android.synthetic.main.content_detail.best_price_txt
-import kotlinx.android.synthetic.main.content_detail.label_recommendation
-import kotlinx.android.synthetic.main.content_detail.quality_product_txt
-import kotlinx.android.synthetic.main.content_detail.reviews_txt
-import kotlinx.android.synthetic.main.content_detail.score
-import kotlinx.android.synthetic.main.content_detail.sells_review_txt
 import kotlinx.android.synthetic.main.content_detail.tabs_layout
-import kotlinx.android.synthetic.main.content_detail.title_txt
-import kotlinx.android.synthetic.main.content_detail.username_txt
 import kotlinx.android.synthetic.main.content_detail.viewPager
+import kotlinx.android.synthetic.main.header_layout.best_price_txt
+import kotlinx.android.synthetic.main.header_layout.label_recommendation
+import kotlinx.android.synthetic.main.header_layout.quality_product_txt
+import kotlinx.android.synthetic.main.header_layout.reviews_txt
+import kotlinx.android.synthetic.main.header_layout.score
+import kotlinx.android.synthetic.main.header_layout.sells_review_txt
+import kotlinx.android.synthetic.main.header_layout.title_txt
+import kotlinx.android.synthetic.main.header_layout.username_txt
 import javax.inject.Inject
 
 
