@@ -11,9 +11,6 @@ import org.junit.runner.Description
 import org.junit.runners.model.Statement
 import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
-import io.reactivex.schedulers.TestScheduler
-
-
 
 
 class RxSchedulerRule : TestRule {
@@ -47,11 +44,5 @@ class RxSchedulerRule : TestRule {
                 }
             }
         }
-    }
-
-    private val testScheduler = TestScheduler()
-
-    fun getTestScheduler(): TestScheduler {
-        return testScheduler
     }
 }
