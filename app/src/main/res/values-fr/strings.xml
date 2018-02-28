@@ -18,4 +18,6 @@
   <string name="recommended_offer">Offre recommandé</string>
   <string name="oops_something_went_wrong">Oops! Quelque chose s\'est mal passé.</string>
   <string name="application_has_encountered_error">L\'application a rencontré une erreur inconnue</string>
+  <string name="new_product">Neuf</string>
+  <string name="used_product">Occasion</string>
 </resources>

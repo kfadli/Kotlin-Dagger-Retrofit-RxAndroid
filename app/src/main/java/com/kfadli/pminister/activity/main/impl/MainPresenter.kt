@@ -9,30 +9,31 @@ import io.reactivex.schedulers.Schedulers
 
 class MainPresenter(var view: IMainView, var api: ProductsApiInterface) : IMainPresenter {
 
-  var disposables: CompositeDisposable = CompositeDisposable()
+    var disposables: CompositeDisposable = CompositeDisposable()
 
-  override fun fetchData() {
-    disposables.add(
-        api.getProductsList()
-            .filter({ view != null })
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ t ->
-              view.hideLoader()
-              view.onDataReceived(t.result?.products)
-            },
-                {
-                  view.hideLoader()
-                  view.onDataFailed()
-                } ))
-  }
+    override fun fetchData() {
+        disposables.add(
+                api.getProductsList()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ t ->
+                            println("Subscribe")
+                            view.hideLoader()
+                            view.onDataReceived(t.result?.products)
+                        },
+                                {
+                                    println("throw")
+                                    view.hideLoader()
+                                    view.onDataFailed()
+                                }))
+    }
 
-  override fun subscribe() {
+    override fun subscribe() {
 
-  }
+    }
 
-  override fun unsubscribe() {
-    disposables.clear()
-  }
+    override fun unsubscribe() {
+        disposables.clear()
+    }
 
 }

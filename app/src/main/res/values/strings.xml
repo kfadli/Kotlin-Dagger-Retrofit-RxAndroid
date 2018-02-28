@@ -18,4 +18,7 @@
   <string name="recommended_offer">Recommended offer</string>
   <string name="oops_something_went_wrong">Something went wrong</string>
   <string name="application_has_encountered_error">The application has encountered an unknown error</string>
+  <string name="new_product">New</string>
+  <string name="used_product">Used</string>
+
 </resources>
