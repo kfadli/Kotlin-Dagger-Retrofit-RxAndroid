@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AlertDialog.Builder
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup.LayoutParams
@@ -88,6 +87,7 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
     //Find all url Images with LARGE format
     val urls: ArrayList<String> = filterUrlByFormat(product?.images, LARGE.toString())
 
+    //Handle ViewPager onClick
     gallery_viewpager.adapter = ImagePagerAdapter(
         supportFragmentManager, urls, View.OnClickListener { v ->
 
@@ -112,6 +112,7 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
     username_txt.text = bestOffer.seller?.login
     sells_review_txt.text = bestOffer.seller!!.formatSellsAndReviews(this)
 
+    //Populate content
     viewPager.adapter = ContentProductAdapter(this, supportFragmentManager, product)
   }
 
@@ -119,20 +120,8 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
    * Method failed to retrieve Data from WebService
    */
   override fun onDataFailed() {
-    val dialogBuilder = Builder(this, R.style.error_dialog).create()
-    dialogBuilder.setCancelable(false)
-    dialogBuilder.setTitle(R.string.oops_something_went_wrong)
-    dialogBuilder.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.retry),
-        { dialog, which ->
-          presenter.fetchData(); dialog.dismiss()
-        })
-    dialogBuilder.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
-        { dialog, which -> dialog.dismiss(); finish() })
-    dialogBuilder.setMessage(getString(R.string.application_has_encountered_error))
-
-    if (!isFinishing) {
-      dialogBuilder.show()
-    }
+    showRetryDialog(R.string.application_has_encountered_error,
+        DialogInterface.OnClickListener { dialog, which -> presenter.fetchData(); dialog.dismiss() })
   }
 
   override fun showLoader() {

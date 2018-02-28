@@ -2,7 +2,6 @@ package com.kfadli.pminister.activity.main.impl
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v7.app.AlertDialog.Builder
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
@@ -71,6 +70,7 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
     val search = menu.findItem(R.id.search)
     searchView = (search.actionView as SearchView)
 
+    //SearchFilter configuration
     disposables.add(fromView(searchView)
         .debounce(300, MILLISECONDS)
         .filter { keyword -> !keyword.isNullOrEmpty() && keyword.length > 3 }
@@ -90,31 +90,12 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
 
     product_list.adapter = adapter
     adapter.filter.filter("")
-
-
   }
 
   override fun onDataFailed() {
     showError("[onDataFailed]")
-
-    val dialogBuilder = Builder(this, R.style.error_dialog).create()
-    dialogBuilder.setCancelable(false)
-    dialogBuilder.setTitle(R.string.oops_something_went_wrong)
-    dialogBuilder.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.retry),
-        { dialog, which ->
-          //Fetch Again data
-          presenter.fetchData()
-          //Dismiss Dialog
-          dialog.dismiss()
-        })
-    dialogBuilder.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
-        { dialog, which -> dialog.dismiss(); finish() })
-    dialogBuilder.setMessage(getString(R.string.application_has_encountered_error))
-
-
-    if (!isFinishing) {
-      dialogBuilder.show()
-    }
+    showRetryDialog(R.string.application_has_encountered_error,
+        DialogInterface.OnClickListener { dialog, which -> presenter.fetchData(); dialog.dismiss() })
   }
 
   override fun showLoader() {

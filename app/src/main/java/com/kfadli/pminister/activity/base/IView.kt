@@ -1,6 +1,7 @@
 package com.kfadli.pminister.activity.base
 
 import android.content.Context
+import android.content.DialogInterface.OnClickListener
 import android.support.annotation.StringRes
 
 interface IView {
@@ -18,5 +19,7 @@ interface IView {
   fun showLoader()
 
   fun hideLoader()
+
+  fun showRetryDialog(resId: Int, listener: OnClickListener)
 
 }
