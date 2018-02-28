@@ -1,16 +1,20 @@
 package com.kfadli.pminister.activity.main.impl
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.view.View.OnClickListener
 import com.kfadli.pminister.R
 import com.kfadli.pminister.R.layout
 import com.kfadli.pminister.activity.base.BaseActivity
+import com.kfadli.pminister.activity.detail.impl.DetailActivity
 import com.kfadli.pminister.activity.main.IMainPresenter
 import com.kfadli.pminister.activity.main.IMainView
 import com.kfadli.pminister.activity.main.adapter.RecyclerProductsAdapter
@@ -27,7 +31,7 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
 import javax.inject.Inject
 
 
-class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
+class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView, OnClickListener {
 
   private val TAG: String = "MainActivity"
 
@@ -86,7 +90,7 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
   override fun onDataReceived(
       products: List<ProductsItem?>?) {
 
-    adapter = RecyclerProductsAdapter(products)
+    adapter = RecyclerProductsAdapter(this, products)
 
     product_list.adapter = adapter
     adapter.filter.filter("")
@@ -106,4 +110,10 @@ class MainActivity : BaseActivity<IMainView, IMainPresenter>(), IMainView {
     progressBar.visibility = View.INVISIBLE
   }
 
+  override fun onClick(v: View?) {
+    ContextCompat.startActivity(this,
+        Intent(this, DetailActivity::class.java), Bundle())
+
+    overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+  }
 }

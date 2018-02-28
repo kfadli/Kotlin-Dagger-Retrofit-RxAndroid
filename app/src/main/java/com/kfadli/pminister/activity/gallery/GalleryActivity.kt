@@ -40,4 +40,11 @@ class GalleryActivity : AppCompatActivity() {
     gallery_viewpager.adapter = ImagePagerAdapter(
         supportFragmentManager, urls, View.OnClickListener { })
   }
+
+  override fun onBackPressed() {
+    super.onBackPressed()
+
+    finish()
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+  }
 }

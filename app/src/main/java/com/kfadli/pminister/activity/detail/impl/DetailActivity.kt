@@ -96,6 +96,7 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
       intent.putStringArrayListExtra(Constant.IMAGE_URLS, originalUrl)
 
       startActivity(intent)
+      overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     })
 
 
@@ -132,5 +133,11 @@ class DetailActivity : BaseActivity<IDetailView, IDetailPresenter>(), IDetailVie
 
   override fun hideLoader() {
     progressBar.visibility = View.INVISIBLE
+  }
+
+  override fun onBackPressed() {
+    super.onBackPressed()
+    finish()
+    overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
   }
 }
